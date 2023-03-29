@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ICoachRepository extends JpaRepository<Coach, Integer>{
-    Optional<Coach> findCoachByAccount(Account account);
+    Coach findCoachByAccount(Account account);
 }

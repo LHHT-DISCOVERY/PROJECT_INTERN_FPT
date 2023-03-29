@@ -9,5 +9,7 @@ import java.util.List;
 public interface IClassesService {
     List<Classes> findAll() ;
 
+    List<Classes> findAllByCoach(Coach coach);
+
     Classes  findAllByIdClass(int id);
 }

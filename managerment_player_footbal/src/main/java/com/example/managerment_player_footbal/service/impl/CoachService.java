@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CoachService implements ICoachService {
@@ -35,7 +36,7 @@ public class CoachService implements ICoachService {
     }
 
     @Override
-    public Coach findByAccountName(Account account) {
-        return iCoachRepository.findCoachByAccount(account).orElse(null);
+    public Coach findCoachByAccount(Account account) {
+        return iCoachRepository.findCoachByAccount(account);
     }
 }

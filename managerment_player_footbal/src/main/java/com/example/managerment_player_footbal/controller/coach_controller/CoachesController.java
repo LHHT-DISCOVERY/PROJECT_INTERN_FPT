@@ -31,16 +31,20 @@ public class CoachesController {
     private IPlayerRating iPlayerRating;
 
     @Autowired
-    private ICoachService iCoachService ;
+    private IAccountService accountService;
+
+    @Autowired
+    private ICoachService iCoachService;
 
     @GetMapping("/listClass")
+    @PreAuthorize("hasRole('ROLE_COACH')")
     public String showListClass(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Account account = iAccountService.findByAccountName(username);
-        Coach coach = iCoachService.findByAccountName(account);
+        Coach coach = iCoachService.findCoachByAccount(account);
         model.addAttribute("coachName", coach.getNameCoach());
-        model.addAttribute("classList", iClassesService.findAll());
+        model.addAttribute("classList", iClassesService.findAllByCoach(coach));
         return "coach/listClass";
     }
 

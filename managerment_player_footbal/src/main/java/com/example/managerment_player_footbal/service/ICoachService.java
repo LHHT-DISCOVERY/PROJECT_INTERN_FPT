@@ -4,10 +4,12 @@ import com.example.managerment_player_footbal.model.Coach;
 import com.example.managerment_player_footbal.model.account.Account;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ICoachService {
 
     List<Coach>  findAll() ;
+
 
     void createOrUpdateCoach(Coach  coach);
 
@@ -15,8 +17,7 @@ public interface ICoachService {
 
     void deleteById(int id);
 
-
-    Coach findByAccountName(Account account);
+    Coach findCoachByAccount(Account account);
 
 
 

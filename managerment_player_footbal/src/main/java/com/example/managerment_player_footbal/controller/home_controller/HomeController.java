@@ -1,6 +1,9 @@
 package com.example.managerment_player_footbal.controller.home_controller;
 
-import com.example.managerment_player_footbal.model.Coach;
+import com.example.managerment_player_footbal.model.account.Account;
+import com.example.managerment_player_footbal.service.IAccountService;
+import com.example.managerment_player_footbal.service.ICoachService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,10 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
-
 @Controller
 public class HomeController {
+    @Autowired
+    private IAccountService iAccountService;
+    @Autowired
+    private ICoachService iCoachService;
+
     @GetMapping("/index")
     public String index() {
         return "index";
@@ -51,7 +57,11 @@ public class HomeController {
 
 
     @GetMapping("coach")
-    public String coach_index() {
+    public String coach_index(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Account account = iAccountService.findByAccountName(username);
+        model.addAttribute("nameCoach", iCoachService.findCoachByAccount(account).getNameCoach());
         return "coach/indexCoach";
     }
 
