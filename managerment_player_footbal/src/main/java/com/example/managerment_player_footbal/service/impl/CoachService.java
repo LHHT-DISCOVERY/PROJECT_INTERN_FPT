@@ -1,6 +1,7 @@
 package com.example.managerment_player_footbal.service.impl;
 
 import com.example.managerment_player_footbal.model.Coach;
+import com.example.managerment_player_footbal.model.account.Account;
 import com.example.managerment_player_footbal.repository.coach_repository.ICoachRepository;
 import com.example.managerment_player_footbal.service.ICoachService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,10 @@ public class CoachService implements ICoachService {
     @Override
     public void deleteById(int id) {
         iCoachRepository.deleteById(id);
+    }
+
+    @Override
+    public Coach findByAccountName(Account account) {
+        return iCoachRepository.findCoachByAccount(account).orElse(null);
     }
 }
