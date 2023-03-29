@@ -1,0 +1,288 @@
+body {
+    margin: 0;
+    background-color: #F5F9FF;
+}
+.wrapper {
+    font-family: 'Poppins', sans-serif;
+}
+.wrapper .profile {
+    display: flex;
+}
+.wrapper .profile .content {
+    margin-left: 70px;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: #F5F9FF;
+}
+.wrapper .profile .content .title {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.wrapper .profile .content .main {
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+}
+.wrapper .profile .content .main .main-content .navbar-profile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+.wrapper .profile .content .main .main-content .navbar-profile li {
+    list-style: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+/*.wrapper .profile .content .main .main-content .navbar-profile .active,*/
+/*.wrapper .profile .content .main .main-content .navbar-profile li:hover*/
+/*{*/
+/*    background: #1F95EE;*/
+/*    transition: all 0.2s linear;*/
+/*}*/
+.wrapper .profile .content .main .main-content .navbar-profile .active a,
+.wrapper .profile .content .main .main-content .navbar-profile li:hover a
+{
+    color: white;
+    transition: all 0.2s linear;
+}
+.wrapper .profile .content .main .main-content .navbar-profile li a {
+    text-decoration: none;
+    color: #1F95EE !important;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-wrapper {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: space-around;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information {
+    padding: 35px 25px;
+    margin: 50px 10%;
+    border-radius: 20px;
+    border: 1px solid #1F95EE;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information table tbody tr:nth-child(odd){
+    background: #dcf4ff;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information table tbody tr:nth-child(even){
+    background: #e8ffce;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-wrapper .profile-information__content {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 30px;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-wrapper .profile-information__content .form-edit {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-wrapper .profile-information__content .form-edit label {
+    width: 200px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-wrapper .profile-information__content .form-edit input {
+    flex: 1;
+    padding: 10px 10px;
+    outline: none;
+    border: 1px solid #1F95EE;
+    border-radius: 5px;
+    background: #f8f9ff;
+    font-size: 17px;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-wrapper .profile-information__avatar {
+    display: flex;
+    flex-direction: column;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-wrapper .profile-information__avatar .avatar-upload {
+    height: 200px;
+    width: 200px;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-wrapper .profile-information__avatar .avatar-upload img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-wrapper .profile-information__avatar .btn-upload-image {
+    text-align: center;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-btn {
+    text-align: center;
+    margin-top: 35px;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-btn input {
+    padding: 10px 35px;
+    text-transform: uppercase;
+    background: #78c478;
+    color: white;
+    font-weight: bold;
+    border: 1px solid cadetblue;
+    border-radius: 5px;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information-btn input:hover {
+    cursor: pointer;
+    background: white;
+    border: 1px solid #78c478;
+    color: #78c478;
+    transition: all 0.3s ease 0s;
+}
+.wrapper .profile .content .title .title-name p{
+    font-size: 35px;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+}
+.wrapper .profile .content .title .account {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 5px 20px;
+    border: 1px solid transparent;
+}
+.wrapper .profile .content .title .account .account-image {
+    width: 45px;
+    height: 45px;
+}
+.wrapper .profile .content .title .account p {
+    margin: 16px 0;
+    font-weight: bold;
+    font-size: 16px;
+}
+.wrapper .profile .content .title .account .account-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.wrapper .profile .content .title .title-name {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.wrapper .profile .content .title .title-name img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+.wrapper .profile .content .title .account:hover {
+    background: white;
+    border: 1px solid lavender;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+#btn-choose-image {
+    text-align: center;
+    display: inline-block;
+    padding: 5px 15px;
+    background: #FF5D6D;
+    color: white;
+    border-radius: 20px;
+    margin: 30px 0;
+    border: 1px solid transparent;
+}
+#btn-choose-image:hover {
+    cursor: pointer;
+    background-color: white;
+    /* box-shadow: 0px 5px 20px #FF5D6D; */
+    color: #FF5D6D;
+    transition: all 0.3s ease 0s;
+    border: 1px solid #FF5D6D;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information .history-coach-rating table {
+    font-size: 16px;
+    white-space: nowrap;
+    text-align: center;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information .history-coach-rating table tbody tr td {
+    vertical-align: middle;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information .history-coach-rating table thead tr th {
+    text-align: center;
+}
+.wrapper .profile .content .main .main-content .navbar-content .profile-information .history-coach-rating .history-coach-rating__content {
+    overflow-x: scroll;
+}
+
+/* CUSTOM SCROLL BAR */
+.history-coach-rating__content::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+.history-coach-rating__content::-webkit-scrollbar-track {
+    background: #e6e6e6;
+}
+.history-coach-rating__content::-webkit-scrollbar-thumb {
+    background: #6186aa;
+    border-radius: 5px;
+}
+.history-coach-rating__content::-webkit-scrollbar-thumb:hover{
+    background: #4075cb;
+}
+/* BUTTON DISPLAY PASSWORD */
+.display-password {
+    position: absolute;
+    right: 0px;
+    top: 10px;
+}
+.display-password span:after {
+    content: "\f00c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    transform: translate(-11px, 1px);
+    font-size: 17px;
+    color: white;
+    right: 0px;
+    opacity: 0;
+    visibility: hidden;
+}
+.display-password span:before {
+    content: "";
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+    transform: translate(-10px, 3px);
+    border: 2px solid firebrick;
+    cursor: pointer;
+}
+.display-password input:checked + span::after {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.2s ease;
+}
+.display-password input:checked + span::before {
+    background: firebrick;
+    transition: all 0.2s ease;
+}
+.notify{
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+.note-red{
+    color: red;
+    background: #ffefef;
+    border: 1px solid #ffd1d1;
+}
+.note-green {
+    color: #45bc24;
+    background: #e8ffe4;
+    border: 1px solid #99ff7b;
+}
+.mg-bt-30 {
+    margin-bottom: 30px;
+}

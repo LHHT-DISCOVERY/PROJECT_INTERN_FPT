@@ -31,7 +31,7 @@
                     <!--                    <img src="" class="img-circle elevation-2" alt="User Image">-->
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Xin Chào Admin!</a>
+                    <a href="#" class="d-block">Xin Chào Coach!!!</a>
                 </div>
             </div>
 
@@ -93,35 +93,31 @@
                             <th scope="col" style="width: 20%">
                                 Tên lớp
                             </th>
-                            <th scope="col" style="width: 20%">
+                            <th>
                                 Chức năng
                             </th>
+
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="class ,iter: ${classList}" th:object="${class}">
-                            <th scope="row" style="padding: 12px" th:text="*{id}">
+                        <tr th:each="class: ${classList}" th:object="${class}">
+                            <th scope="row" style="padding: 12px" th:text="*{classId}">
                                 <a></a>
                             </th>
                             <td style="padding-left: 12px" th:text="${class.coach.nameCoach}">
                                 <a></a>
                             </td>
-                            <td th:text="${class.capacity}">
+                            <td th:text="${class.playerSet.size()}+'/'+${class.capacity}">
                                 <a></a>
                             </td>
                             <td th:text="${class.className}">
                                 <a> </a>
                             </td>
                             <td>
-
-                                <a class="btn btn-info btn-sm" th:href="@{/coach/memberClass/{id}(id=*{id})}">
+                                <a class="btn btn-info btn-sm"
+                                   th:href="@{/coach/memberClass/{id}(id=${class.classId})}">
                                     <i class="fas fa-eye"></i>
                                     Thành viên
-                                </a>
-
-                                <a class="btn btn-danger btn-sm" href="">
-                                    <i class="fa fa-edit"></i>
-                                    Đánh giá
                                 </a>
                             </td>
                         </tr>

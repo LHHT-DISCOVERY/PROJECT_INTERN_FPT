@@ -18,4 +18,9 @@ public class PlayerService implements IPlayerService {
     public List<Player> findAllByIdClass(int id) {
         return iPlayerRepository.findAllByClassesId(id);
     }
+
+    @Override
+    public Player getById(int id) {
+        return iPlayerRepository.findByPlayerId(id).orElse(null);
+    }
 }

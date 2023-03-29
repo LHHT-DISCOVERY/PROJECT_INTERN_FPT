@@ -251,7 +251,7 @@ body {
 
 .player .player-info .content .content-right .content-right__info .position .position-value,
 .player .player-info .content .content-right .content-right__info .completion .completion-value {
-    font-size: 30px;
+    font-size: 15px;
     border-bottom: 3px solid #1F95EE;
 }
 

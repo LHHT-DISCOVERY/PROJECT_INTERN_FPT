@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Player Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css}"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins&display=swap}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/player/dist/css/slick.css}"/>
+    <link rel="stylesheet" th:href="@{/player/dist/css/home.css}">
+    <link rel="stylesheet" th:href="@{/player/dist/css/loader.css}">
+    <link rel="stylesheet" th:href="@{/player/dist/css/header.css}">
+</head>
+<body>
+<div id="preloader"></div>
+<div class="wrapper">
+    <div class="player">
+        <div th:replace="user/fragments/header"></div>
+        <div class="player-info__wrapper">
+            <div class="player-info">
+                <div class="header">
+                    <div class="title">
+                        <div class="title-image">
+                            <img src="/player/dist/img/soccer-icon.png" alt="Ảnh quả bóng"
+                                 style="width: 50px; margin-left: 18px;">
+                        </div>
+                        <p>Player Home</p>
+                    </div>
+                    <div class=" coach">
+                        <div class="coach-image">
+                            <img th:src="@{${player.avatar}}" alt="Me" src="">
+                        </div>
+                        <p th:text="${player.name}"></p>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="content-left">
+                        <div class="content-left__info">
+                            <div class="infomation">
+                                <div class="name">
+                                    <p th:text="${player.name}"></p>
+                                </div>
+                                <div class="position">
+                                    <p th:text="'Position : '+${player.position}"></p>
+                                </div>
+                                <!-- <div class="class">
+                                    <p>Manchester United</p>
+                                </div>
+                                <div class="age">
+                                    <p>21 years old</p>
+                                </div> -->
+                            </div>
+                            <div class="avatar">
+                                <div class="avatar-image">
+                                    <img th:src="@{${player.avatar}}" alt="Your Image">
+                                </div>
+                                <div class="btn-edit"><a href="/user/profile">Edit</a></div>
+                            </div>
+                        </div>
+                        <div class="content-left__chart">
+                            <div class="radar-chart">
+                                <p>Player Stats</p>
+                                <canvas id="chart"></canvas>
+                            </div>
+                            <div class="line-chart">
+                                <p>All Player Stats</p>
+                                <canvas id="canvas" class="chartjs-render-monitor"></canvas>
+                            </div>
+                            <div class="report-health">
+                                <p>Báo cáo sức khỏe gần nhất : </p>
+                                <div class="report-health__content">
+                                    <div class="report-health__item health-icon">
+                                        <img src="/player/dist/img/heartbeat-icon.png" alt="Nhịp tim">
+                                        <!--                                        <p style="color: #ED1C24"-->
+                                        <!--                                           th:text="${medical_report.heartbeat} + ' nhịp/phút'"></p>-->
+                                    </div>
+                                    <div class="report-health__item health-height">
+                                        <img th:src="@{/player/dist/img/height-icon.png}" alt="Height">
+                                        <!--                                        <p style="color: #00A2E8;" th:text="${medical_report.height} + ' cm'"></p>-->
+                                    </div>
+                                    <div class="report-health__item health-weight">
+                                        <img th:src="@{/player/dist/img/weight-icon.png}" alt="Weight">
+                                        <!--                                        <p style="color: #FF7F27;" th:text="${medical_report.weight} + ' kg'"></p>-->
+                                    </div>
+                                    <div class="report-health__item health-bmi">
+                                        <img class="bmi-nohover" th:src="@{/player/dist/img/BMI-icon.png}"
+                                             alt="BMI">
+                                        <img class="bmi-hover" th:src="@{/player/dist/img/calculator.gif}"
+                                             alt="GIF">
+                                        <!--                                        <p style="color: #A349A4;" th:text="${bmi}"></p>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-right">
+                        <div class="content-right__info">
+                            <div class="position">
+                                <div class="position-title">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <p>Coach</p>
+                                </div>
+                                <div class="position-value">
+                                    <p th:text="${coach_name}"></p>
+                                </div>
+                            </div>
+                            <div class="completion">
+                                <div class="completion-title">
+                                    <i class="fa-solid fa-hourglass"></i>
+                                    <p>Course Progress</p>
+                                </div>
+                                <div class="completion-value">
+                                    <p th:text="${percent > 100 ? '100%' : percent + '%'}"></p>
+                                </div>
+                            </div>
+                            <div class="coach-trainer">
+                                <div class="coach-trainer__title">
+                                    <i class="fa-solid fa-people-group"></i>
+                                    <div class="coach-trainer__parameter">
+                                        <p class="coach-trainer__name" th:text="${player.classes.className}"></p>
+                                        <p class="coach-trainer__number" th:text="${members.size()} + ' Members'"></p>
+                                    </div>
+                                </div>
+                                <div class="coach-trainer__value">
+                                    <th:block th:each="member : ${members}">
+                                        <div class="coach-trainer__item">
+                                            <img th:src="@{${member.avatar}}"
+                                                 alt="Thành viên">
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-right__schedule">
+                            <div id="oclock"></div>
+                            <div class="schedule-wrapper">
+                                <div class="schedule-header">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    <p>Today Schedule</p>
+                                </div>
+                                <div class="schedule-carousel__wrapper" th:if="${percent < 100}">
+                                    <div class="schedule-carousel">
+                                        <div class="schedule-carousel-no" th:if="${schedules.size() == 0}">
+                                            <p>Hôm nay không có tiết học nào.</p>
+                                        </div>
+                                        <th:block th:each="schedule : ${schedules}">
+                                            <div class="carousel-item">
+                                                <div class="carousel-title">
+                                                    <th:block th:each=" subject : ${subjects}">
+                                                        <th:block
+                                                                th:if="${schedule.subjectId == subject.subjectId}">
+                                                            <p class="schedule-name"
+                                                               th:text="${subject.subjectName}">
+                                                            </p>
+                                                        </th:block>
+                                                    </th:block>
+                                                    <p class="schedule-teacher">
+                                                        <i class="fa-regular fa-clock"></i>
+                                                        <span th:text="${schedule.startTime}"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="carousel-image">
+                                                    <div class="carousel-staidum">
+                                                        <p th:text="${schedule.location}"></p>
+                                                    </div>
+                                                    <img th:src="@{/player/dist/img/stadium.jpg}" alt="Ảnh">
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+                                <!--                                <div class="schedule-carousel__complete" th:if="${percent > 100}">-->
+                                <!--                                    <img th:src="@{/player/dist/img/medal.png}" alt="Medal">-->
+                                <!--                                    <p>Bạn đã hoàn thành khóa học của trung tâm</p>-->
+                                <!--                                    <img th:src="@{/player/dist/img/medal.png}" alt="Medal">-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{https://cdn2.hubspot.net/hubfs/476360/Chart.js}"></script>
+<script th:src="@{https://cdn2.hubspot.net/hubfs/476360/utils.js}"></script>
+<script
+        th:src="@{https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0/dist/chartjs-plugin-datalabels.min.js}"></script>
+<script type="text/javascript" th:src="@{//code.jquery.com/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" th:src="@{//code.jquery.com/jquery-migrate-1.2.1.min.js}"></script>
+<script type="text/javascript" th:src="@{//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js}"></script>
+<script th:src="@{/player/dist/js/linechart.js}"></script>
+<script th:src="@{/player/dist/js/radarchart.js}"></script>
+<script th:src="@{/player/dist/js/flexslider.js}"></script>
+<script>
+    function dongho() {
+        var time = new Date();
+        var hour = time.getHours();
+        var minutes = time.getMinutes();
+        var second = time.getSeconds();
+        if (hour < 10) {
+            hour = '0' + hour;
+        }
+        if (minutes < 10) {
+            minutes = '0' + minutes;
+        }
+        if (second < 10) {
+            second = '0' + second;
+        }
+        document.getElementById("oclock").innerHTML = '<i class="fa-regular fa-clock"></i>' + hour + ":" + minutes + ":" + second;
+        setTimeout("dongho()", 1000);
+    }
+
+    dongho();
+</script>
+<script th:src="@{/player/dist/js/loader.js}"></script>
+</html>

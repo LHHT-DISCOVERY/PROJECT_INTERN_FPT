@@ -63,21 +63,21 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3 divder my-5">
-                            <div class="col-4">
-                                <label for="position" class="form-label Text-cloer form-label Text-cloer">Chọn Account
-                                    Phù
-                                    Hợp: </label>
-                            </div>
-                            <div class="col-8">
-                                <select th:field="*{account}" id="position" required>
-                                    <option selected value="">----------</option>
-                                    <option th:each="acc : ${accountList}"
-                                            th:value="${acc.accountId}"
-                                            th:text="${acc.accountName}"></option>
-                                </select>
-                            </div>
-                        </div>
+<!--                        <div class="row mb-3 divder my-5">-->
+<!--                            <div class="col-4">-->
+<!--                                <label for="position" class="form-label Text-cloer form-label Text-cloer">Chọn Account-->
+<!--                                    Phù-->
+<!--                                    Hợp: </label>-->
+<!--                            </div>-->
+<!--                            <div class="col-8">-->
+<!--                                <select th:field="*{account}" id="position" required>-->
+<!--                                    <option selected value="">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
+<!--                                    <option th:each="acc : ${accountList}"-->
+<!--                                            th:value="${acc.accountName}"-->
+<!--                                            th:text="${acc.accountName}"></option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
                         <div class="row mb-3">
                             <div class="col-4">

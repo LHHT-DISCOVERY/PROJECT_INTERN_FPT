@@ -7,4 +7,6 @@ import java.util.List;
 public interface IPlayerService {
 
     List<Player> findAllByIdClass(int id) ;
+
+    Player getById(int id);
 }

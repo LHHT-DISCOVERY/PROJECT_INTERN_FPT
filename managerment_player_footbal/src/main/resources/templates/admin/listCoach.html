@@ -49,11 +49,6 @@
         <div class="row m-4 d-flex">
             <h1 style="color: red" th:if="${message} != null"><span th:text="${message}"></span></h1>
             <h1 style="color: #2bce2b" th:if="${messageUpdate} != null"><span th:text="${messageUpdate}"></span></h1>
-            <div class="col-5">
-                <a th:href="@{/admin/createCoach}" class="btn btn-primary ">
-                    Thêm mới huấn luyện Viên
-                </a>
-            </div>
         </div>
         <table class="table table-striped border table-hover">
             <thead class="thead-inverse">
@@ -66,6 +61,7 @@
                 <th>Giới Tính</th>
                 <th>Số Điện Thoại</th>
                 <th>Email</th>
+                <th>Account</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -80,6 +76,7 @@
                 <td th:text="${coach.gender} ? 'Nam' : 'Nữ'"></td>
                 <td th:text="${coach.phone}"></td>
                 <td th:text="${coach.email}"></td>
+                <td th:text="${coach.account.accountName}"></td>
                 <td>
                     <div>
                         <a th:href="@{/admin/updateCoach/{id}(id=*{coachId})}" class="btn btn-warning"
@@ -142,7 +139,8 @@
                     <!--          lấy id => Name-->
                     <input type="text" name="idCoach" id="idCoach">
                 </form>
-                 Bạn có muốn xóa huấn luyện viên <input class="border-0" id="nameCoach" style="color: red ; font-weight: bold"> <span> Không ? </span>
+                Bạn có muốn xóa huấn luyện viên <input class="border-0" id="nameCoach"
+                                                       style="color: red ; font-weight: bold"> <span> Không ? </span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>

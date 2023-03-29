@@ -25,13 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findByAccountName(username);
-        if (account == null) {
+        if (account == null || !account.getAccountName().equals(username)) {
             throw new UsernameNotFoundException("User không tồn tại");
         }
 
-        if(!account.getAccountName().equals(username)){
-            throw new UsernameNotFoundException("User không tồn tại");
-        }
 
         List<String> roles = accountRoleRepository.findAllRoleByUser(username);
         List<GrantedAuthority> authorityList = new ArrayList<>();

@@ -49,10 +49,6 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/user")
-    public String user_index() {
-        return "user";
-    }
 
     @GetMapping("coach")
     public String coach_index() {
@@ -65,10 +61,10 @@ public class HomeController {
     }
 
     @GetMapping("/admin")
-    public String admin_index(Model model ) {
+    public String admin_index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        model.addAttribute("userName" , username);
+        model.addAttribute("userName", username);
         return "admin/index";
     }
 

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Player Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css}"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins&display=swap}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/player/dist/css/profile.css}">
+    <link rel="stylesheet" th:href="@{/player/dist/css/loader.css}">
+    <link rel="stylesheet" th:href="@{/player/dist/css/header.css}">
+</head>
+<body>
+<div id="preloader"></div>
+<div class="wrapper">
+    <div class="profile">
+        <div th:replace="user/fragments/header"></div>
+        <div class="content">
+            <div class="title">
+                <div class="title-name">
+                    <img th:src="@{/player/dist/img/profile.png}" alt="Evaluate">
+                    <p>Player Profile</p>
+                </div>
+                <div class="account">
+                    <div class="account-image">
+                        <img th:src="@{${player.avatar}}" alt="Me">
+                    </div>
+                    <p th:text="${player.name}"></p>
+                </div>
+            </div>
+            <div class="main">
+                <div class="main-content">
+                    <ul class="navbar-profile nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" th:href="@{#profile}">Thông tin cá nhân</a></li>
+                        <li><a data-toggle="tab" th:href="@{#reset}">Đổi mật khẩu</a></li>
+                        <li><a data-toggle="tab" th:href="@{#class}">Danh sách lớp học</a></li>
+                    </ul>
+                    <div class="tab-content navbar-content">
+                        <div class="profile-information tab-pane fade in active" id="profile">
+                            <div>
+                                <p th:class="${success == true ? 'notify note-green mg-bt-30':''}"
+                                   th:text="${success == true ? 'Đổi mật khẩu thành công' : ''}"></p>
+                            </div>
+                            <form>
+                                <div class="profile-information-wrapper">
+                                    <div class="profile-information__content">
+                                        <div class="form-edit" style="display: none">
+                                            <label>ID</label>
+                                            <input type="text" id="player_id" th:field="${player.playerId}">
+                                        </div>
+                                        <div class="form-edit" style="display: none">
+                                            <label>Account</label>
+                                            <input type="text" id="account_id" th:field="${player.account.accountName}">
+                                        </div>
+                                        <div class="form-edit" style="display: none">
+                                            <label>Class</label>
+                                            <input type="text" id="class_id" th:field="${player.classes.classId}">
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>Họ tên</label>
+                                            <input type="text" id="full_name" th:field="${player.name}">
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>Tên đăng nhập</label>
+                                            <input type="text" id="my_username" th:field="${player.account.accountName}"
+                                                   disabled>
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>Mật khẩu</label>
+                                            <input disabled type="password" id="my_pass"
+                                                   th:value="${player.account.password}" th:name="'password'">
+                                            <label class="display-password">
+                                                <input style="display: none" type="checkbox" onclick="myFunction1()"
+                                                       id="show">
+                                                <span></span>
+                                            </label>
+                                            <script>
+                                                function myFunction1() {
+                                                    var x = document.getElementById("my_pass");
+                                                    if (x.type === "password") {
+                                                        x.type = "text";
+                                                    } else {
+                                                        x.type = "password";
+                                                    }
+                                                }
+                                            </script>
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>Vị trí</label>
+                                            <input type="text" id="my_position" th:field="${player.position}"
+                                                   disabled>
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>Huấn luyện viên</label>
+                                            <input type="text" id="my_coach"
+                                                   th:field="${player.classes.coach.nameCoach}"
+                                                   disabled>
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>Class</label>
+                                            <input type="text" id="my_class" th:field="${player.classes.className}"
+                                                   disabled>
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>Ngày sinh</label>
+                                            <input type="date" id="my_date" th:field="${player.birthday}">
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>SĐT</label>
+                                            <input type="text" id="parent_phone" th:field="${player.parentPhone}">
+                                        </div>
+                                    </div>
+                                    <div class="profile-information__avatar">
+                                        <div class="avatar-upload">
+                                            <img id="view-avatar"
+                                                 th:src="@{${player.avatar}}" alt="">
+                                        </div>
+                                        <div class="btn-upload-image">
+                                            <input style="display: none" type="file" id="upload" name="image"
+                                                   onchange="preview()" th:field="${player.avatar}">
+                                            <label for="upload">
+                                                <p id="btn-choose-image">Chọn ảnh</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-information-btn">
+                                    <input class="btn-save-information" type="button" id="saveBtn" value="Update">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="profile-information tab-pane fade" id="reset">
+                            <form th:action="@{/user/profile/account/save}" method="post">
+                                <div class="profile-information-wrapper">
+                                    <div class="profile-information__content">
+                                        <div class="form-edit" style="display: none">
+                                            <label>Account</label>
+                                            <input type="text" th:field="${player.account.accountName}">
+                                        </div>
+                                        <div class="form-edit" style="display: none">
+                                            <label>Username</label>
+                                            <input type="text" th:field="${player.account.accountName}">
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>Mật khẩu mới</label>
+                                            <input type="password" id="new_pass" th:field="${player.account.password}">
+                                        </div>
+                                        <div class="form-edit">
+                                            <label>Nhập lại mật khẩu mới</label>
+                                            <input type="password" id="confirm_pass" onkeyup="check()">
+                                            <span id="confirm-notify"></span>
+                                        </div>
+                                        <script>
+                                            function check() {
+                                                var newp = document.getElementById("new_pass").value;
+                                                var conf = document.getElementById("confirm_pass").value;
+                                                if (newp !== conf) {
+                                                    $("#btn-update-account").css({
+                                                        "pointer-events": "none",
+                                                        "opacity": "0.4"
+                                                    });
+                                                    document.getElementById("confirm-notify").innerHTML = '<i style="' +
+                                                        'position: absolute;\n' +
+                                                        '    right: 10px;\n' +
+                                                        '    font-size: 20px;\n' +
+                                                        '    color: red;\n' +
+                                                        '    font-weight: bolder;\n' +
+                                                        '    top: 13px;" class="fa-solid fa-xmark"></i>';
+                                                } else {
+                                                    $("#btn-update-account").css({
+                                                        "pointer-events": "unset",
+                                                        "opacity": "1"
+                                                    });
+                                                    document.getElementById("confirm-notify").innerHTML = '<i style="' +
+                                                        'position: absolute;\n' +
+                                                        '    right: 10px;\n' +
+                                                        '    font-size: 20px;\n' +
+                                                        '    color: #66dd66;\n' +
+                                                        '    font-weight: bolder;\n' +
+                                                        '    top: 13px;" class="fa-solid fa-check"></i>';
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="profile-information-btn">
+                                    <input class="btn-save-information" id="btn-update-account" type="submit"
+                                           value="Update">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="profile-information tab-pane fade" id="class">
+                            <div class="history-coach-rating">
+                                <div class="history-coach-rating__content">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Class ID</th>
+                                            <th>Coach Name</th>
+                                            <th>Coach Image</th>
+                                            <th>Capacity</th>
+                                            <th>Class Name</th>
+                                            <th>Member</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" class : ${classes}">
+                                            <td th:text="${class.classId}"></td>
+                                            <td th:text="${class.coach.nameCoach}"></td>
+                                            <td><img
+                                                    style="height: 60px;width: 60px;object-fit: cover;border-radius: 5px;"
+                                                    th:src="@{'/player/dist/img/avatar/' + ${class.coach.avatar}}"
+                                                    alt=""></td>
+                                            <td th:text="${class.capacity}"></td>
+                                            <td th:text="${class.className}"></td>
+                                            <th:block th:if="${class.classId == player.classes.classId}">
+                                                <td><i style="color: #37bf37;font-size: 22px;"
+                                                       class="fa-solid fa-circle-check"></i></td>
+                                            </th:block>
+                                            <th:block th:if="${class.classId != player.classes.classId}">
+                                                <td><i style="font-size: 22px;color: #fc5050;"
+                                                       class="fa-solid fa-circle-xmark"></i></td>
+                                            </th:block>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{//code.jquery.com/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" th:src="@{//code.jquery.com/jquery-migrate-1.2.1.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+<script>
+    function preview() {
+        document.getElementById("view-avatar").src = URL.createObjectURL(event.target.files[0]);
+    }
+
+    $("#saveBtn").click(function () {
+        var player_id = $('#player_id').val();
+        var full_name = $('#full_name').val();
+        var account_id = $('#account_id').val();
+        var birth = $('#my_date').val();
+        var parent_phone = $('#parent_phone').val();
+        var class_id = $("#class_id").val();
+        var position = $("#my_position").val();
+
+        var playerRequest = new FormData();
+        playerRequest.append("playerId", player_id);
+        playerRequest.append("accountId", account_id);
+        playerRequest.append("classId", class_id);
+        playerRequest.append("name", full_name);
+        playerRequest.append("birthDay", birth);
+        playerRequest.append("parentPhone", parent_phone);
+        playerRequest.append("position", position);
+
+        if (upload.files[0] !== undefined) {
+            playerRequest.append("avatar", upload.files[0]);
+        }
+        $.ajax({
+            type: 'PUT',
+            url: 'http://localhost:8080/api/user',
+            data: playerRequest,
+            enctype: 'multipart/form-data',
+            processData: false,
+            cache: false,
+            contentType: false,
+            error: function (error) {
+                console.log(error);
+                alert("Chỉnh sửa người dùng đã lỗi!");
+            },
+            success: function (response) {
+                alert(" Chỉnh sửa người dùng thành công!")
+                window.location.replace('http://localhost:8080/user/profile');
+            }
+        });
+    });
+</script>
+<script th:src="@{/player/dist/js/loader.js}"></script>
+</html>

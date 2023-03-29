@@ -1,10 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="coach/indexCoach :: head">
 </head>
-<body>
-$END$
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+    <!-- Navbar -->
+
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside style="position:fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            border-right: 1px solid #162636;
+            height: 100%;" class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="../../index3.html" class="brand-link">
+            <!--            <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"-->
+            <!--            style="opacity: .8">-->
+            <span class="brand-text font-weight-light">Coach</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <!--                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">Alexander Pierce</a>
+                </div>
+            </div>
+
+            <!-- SidebarSearch Form -->
+
+
+            <!-- Sidebar Menu -->
+            <nav th:replace="coach/indexCoach :: nav" >
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Đánh giá học viên</h1>
+                        <p class="text-danger" th:if="${error}!= null" th:text="${error}" ></p>
+                        <p class="text-danger" th:if="${error1}!= null" th:text="${error1}" ></p>
+                        <p class="text-danger" th:if="${error2}!= null" th:text="${error2}" ></p>
+                        <p class="text-danger" th:if="${error3}!= null" th:text="${error3}" ></p>
+                        <p class="text-danger" th:if="${error4}!= null" th:text="${error4}" ></p>
+                        <p class="text-danger" th:if="${error5}!= null" th:text="${error5}" ></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Đánh giá học viên</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Đánh giá học viên </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body p-0" style="overflow-x: scroll">
+
+                        <table class="table table-bordered" style="vertical-align: middle;">
+                            <form th:action="@{/coach/save}" method="post">
+                            <thead>
+                            <tr class="">
+                                <th rowspan="2">
+                                    Username
+                                </th>
+                                <th rowspan="2">
+                                    Tên học viên
+                                </th>
+                                <th colspan="8" >
+                                    Đánh giá học viên
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Speed
+                                </th>
+                                <th>
+                                    Technique
+                                </th>
+                                <th>
+                                    Strength
+                                </th>
+                                <th>
+                                    Jumping
+                                </th>
+                                <th>
+                                    Defense
+                                </th>
+                                <th>
+                                    Offense
+                                </th>
+                                <th th:if="${rating.create_date} != null">
+                                    Date
+                                </th>
+                                <th>
+                                    Menu
+                                </th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="display : none" >
+<!--                                    <input type="text"th:field="${rating.ID_Rating}">-->
+                                </td>
+                                <td style="display : none" >
+                                    <input type="text"th:field="${rating.player.playerId}" >
+                                </td>
+                                <td style="display : none">
+                                    <input type="text" th:field="${rating.coach.coachId}">
+                                </td>
+                                <td style="display:none" >
+                                    <input type="text" id="the-date" th:field="${rating.create_date}">
+                                </td>
+                                <td style="min-width: 160px;" th:text="${rating.player.account.accountName}">
+<!--                                    nguyenhoanghuy-->
+                                </td>
+                                <td style="min-width: 160px;" th:text="${rating.player.name}">
+<!--                                    Nguyễn Hoàng Huy-->
+                                </td>
+                                <td>
+
+                                    <div class="input-group input-group-sm ">
+                                        <input th:field="${rating.speed}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm ">
+                                        <input th:field="${rating.technique}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm ">
+                                        <input th:field="${rating.strength}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm ">
+                                        <input th:field="${rating.jumping}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm ">
+                                        <input th:field="${rating.defense}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm ">
+                                        <input th:field="${rating.offense}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </td>
+                                <td style="white-space: nowrap;" th:if="${rating.create_date} != null" th:text="${rating.create_date}">
+
+                                </td>
+                                <td>
+                                    <div class="col-12">
+                                        <input type="submit" value="Submit" class="btn btn-success float-right">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </form>
+
+                        </table>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer th:replace="coach/indexCoach :: footer" class="main-footer"></footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<!-- <script src="../../plugins/jquery/jquery.min.js"></script> -->
+<!-- Bootstrap 4 -->
+<!-- <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<!-- AdminLTE App -->
+<!-- <script src="../../dist/js/adminlte.min.js"></script> -->
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="../../dist/js/demo.js"></script> -->
+<!-- <script src="../../plugins/daterangepicker/daterangepicker.js"></script> -->
+
 </body>
+<script>
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10)
+        month = "0" + month;
+    if (day < 10)
+        day = "0" + day;
+
+    var today = year + "-" + month + "-" + day;
+
+
+    document.getElementById('the-date').value = today;
+</script>
 </html>

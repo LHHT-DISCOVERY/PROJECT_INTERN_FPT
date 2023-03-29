@@ -1,0 +1,13 @@
+<nav class="player-menu" th:fragment="header">
+    <div class="player-menu__redirect">
+        <a href="/user"><img src="/player/dist/img/home-icon.png" alt="Home"></a>
+        <a href="#"><img src="/player/dist/img/Calendar.png" alt="Calendar"></a>
+        <a href="/user/evaluate"><img src="/player/dist/img/User.png" alt="Coach Rating"></a>
+        <a href="/user/profile"><img src="/player/dist/img/Settings.png" alt="Setting"></a>
+    </div>
+    <div class="player-menu__logout">
+        <form th:action="@{/doLogout}" method="post">
+            <button  class="btn btn-primary" type="submit"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        </form>
+    </div>
+</nav>

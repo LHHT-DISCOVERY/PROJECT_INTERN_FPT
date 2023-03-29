@@ -17,4 +17,19 @@ public class AccountService implements IAccountService {
     public List<Account> findAll() {
         return accountRepository.findAll();
     }
+
+    public boolean isUsernameExists(String username) {
+        Account user = accountRepository.findByAccountName(username);
+        return user != null;
+    }
+
+    @Override
+    public Account findByAccountName(String accountName) {
+        return accountRepository.findByAccountName(accountName);
+    }
+
+    @Override
+    public Account createOrUpdate(Account account) {
+        return accountRepository.save(account);
+    }
 }

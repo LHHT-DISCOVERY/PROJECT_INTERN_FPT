@@ -1,17 +1,15 @@
 package com.example.managerment_player_footbal.model.account;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class AccountRole {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "account_name")
     private Account account;
 
     @ManyToOne
@@ -44,4 +42,5 @@ public class AccountRole {
     public void setRole(Role role) {
         this.role = role;
     }
+
 }

@@ -18,8 +18,8 @@
             height: 100%;" class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="../../index3.html" class="brand-link">
-<!--            <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"-->
-<!--            style="opacity: .8">-->
+            <!--            <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"-->
+            <!--            style="opacity: .8">-->
             <span class="brand-text font-weight-light">Coach</span>
         </a>
 
@@ -39,7 +39,7 @@
 
 
             <!-- Sidebar Menu -->
-            <nav th:replace="coach/indexCoach :: nav" >
+            <nav th:replace="coach/indexCoach :: nav">
             </nav>
             <!-- /.sidebar-menu -->
         </div>
@@ -54,6 +54,11 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>Danh sách học viên lớp</h1>
+
+                        <div class="row m-4 d-flex">
+                            <h1 style="color: #00b44e" th:if="${message} != null"><span th:text="${message}"></span>
+                            </h1>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -81,7 +86,7 @@
                 <div class="card-body p-0" style="overflow-x: scroll">
                     <table class="table table-striped projects">
                         <thead>
-                        <tr  class="text-center" style="white-space: nowrap">
+                        <tr class="text-center" style="white-space: nowrap">
                             <th style="width: 12%">
                                 #ID
                             </th>
@@ -106,37 +111,52 @@
                             <th style="width: 12%">
                                 SĐT cha mẹ
                             </th>
+                            <th>
+                                menu
+                            </th>
 
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="player : ${playerList}" class="text-center" style="white-space: nowrap">
-                            <td th:text="${player.id}" >
+                            <td th:text="${player.playerId}">
                                 <a></a>
-                            </td >
-                            <td  th:text="${player.avatar}" >
-<!--                                <img style="width: 50px; height: 50px; object-fit: cover" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-11.jpg">-->
+                            </td>
+                            <td>
+                                <img th:src="@{${player.avatar}}" style="width: 50px; height: 50px; object-fit: cover">
+                                <!--                                <img src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-11.jpg">-->
                             </td>
                             <td th:text="${player.account.accountName}">
-<!--                                <a>nguyenhoanghuy</a>-->
+                                <!--                                <a>nguyenhoanghuy</a>-->
                             </td>
                             <td th:text="${player.name}">
-<!--                                <a>Nguyễn Hoàng huy</a>-->
+                                <!--                                <a>Nguyễn Hoàng huy</a>-->
                             </td>
                             <td th:text="${player.birthday}">
-<!--                                <a>01/01/2001</a>-->
+                                <!--                                <a>01/01/2001</a>-->
                             </td>
                             <td th:text="${player.height}  + ' cm'">
-<!--                                <a>1.7 mét</a>-->
+                                <!--                                <a>1.7 mét</a>-->
                             </td>
-                            <td th:text="${player.weight} + ' kg'"  >
-                                <span> KG</span>
-<!--                                <a>80 kg</a>-->
+                            <td th:text="${player.weight} + ' kg'">
+                                <!--                                <a>80 kg</a>-->
                             </td>
-                            <td th:text="${player.parentPhone}" >
+                            <td th:text="${player.parentPhone}">
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-sm"
+                                   th:href="@{/coach/ratingStudent/{id}(id=*{player.playerId})}">
+                                    <i class="fa fa-edit"></i>
+                                    Đánh giá
+                                </a>
+
+                                <a class="btn btn-info btn-sm"
+                                   th:href="@{/coach/historyRating/{id}(id=*{player.playerId})}">
+                                    <i class="fas fa-eye"></i>
+                                    Lịch sử
+                                </a>
                             </td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>

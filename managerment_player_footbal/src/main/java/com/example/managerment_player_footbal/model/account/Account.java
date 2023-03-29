@@ -5,9 +5,6 @@ import javax.persistence.*;
 @Entity
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer accountId;
-
     @Column(name = "account_name", nullable = false)
     private String accountName;
 
@@ -22,13 +19,6 @@ public class Account {
         this.password = password;
     }
 
-    public Integer getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
-    }
 
     public String getAccountName() {
         return accountName;

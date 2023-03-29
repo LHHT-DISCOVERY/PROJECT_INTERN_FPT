@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluate coach</title>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css}"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap}" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Poppins&display=swap}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css}"/>
+    <link rel="stylesheet" th:href="@{/player/dist/css/evaluate.css}">
+    <link rel="stylesheet" th:href="@{/player/dist/css/loader.css}">
+    <link rel="stylesheet" th:href="@{/player/dist/css/header.css}">
+</head>
+
+<body>
+<div id="preloader"></div>
+<div class="wrapper">
+    <div class="evaluate">
+        <div th:replace="user/fragments/header"></div>
+        <div class="content">
+            <div class="title">
+                <div class="title-name">
+                    <img th:src="@{/player/dist/img/evaluate-icon.png}" alt="Evaluate">
+                    <p>Evaluate Coach</p>
+                </div>
+                <div class="account">
+                    <div class="account-image">
+                        <img th:src="@{${player.avatar}}" alt="Me">
+                    </div>
+                    <p th:text="${player.name}"></p>
+                </div>
+            </div>
+            <div class="main">
+                <div class="class">
+                    <div class="class-item">
+                        <label class="class-name" for="class-btn">
+                            <input type="button" id="class-btn" style="display: none">
+                            <span>
+                                <div>
+                                    <i class="fa-solid fa-caret-down" id="down"></i>
+                                <i style="display: none; margin-top: 5px" class="fa-solid fa-caret-up" id="up"></i>
+                                </div>
+                                <p th:text="${player.classEntity.className}"></p></span>
+                        </label>
+                        <div class="class-coach" id="my_coach">
+                            <div class="coach-item active">
+                                <div class="coach-name">
+                                    <input type="text" th:field="${player.classEntity.coachEntity.coachId}"
+                                           style="display: none" id="coach_id">
+                                    <input type="text" th:field="${player.playerId}" style="display: none"
+                                           id="player_id">
+                                    <img th:src="@{'/player/dist/img/avatar/' +${player.classEntity.coachEntity.avatar}}"
+                                         alt="HLV trưởng">
+                                    <p th:text="${player.classEntity.coachEntity.nameCoach}"></p>
+                                </div>
+                                <label>
+                                    <input type="radio" id="coach-form" name="evaluate-coach" style="display: none"
+                                           checked>
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                <div class="coach">-->
+                <!--                    <div class="list-coach">-->
+                <!--                        <th:block th:each=" coach : ${coaches}">-->
+                <!--                                <div th:class="${coachEntity.coachId == coach.coachId ? 'coach-item active' : 'coach-item disabled'}">-->
+                <!--                                    <div class="coach-name">-->
+                <!--                                        <img th:src="@{'/player/dist/img/avatar/' + ${coach.avatar}}" alt="HLV trưởng">-->
+                <!--                                        <p th:text="${coach.nameCoach}"></p>-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                        </th:block>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div>
+                    <div>
+                        <p th:class="${complete == false ? 'notify note-red' : ''}" th:text="${complete == false ? '*Bạn chưa thể đánh giá huấn luyện viên khi khóa học chưa kết thúc':''}"></p>
+                        <p th:class="${success == true ? 'notify note-green' : ''}" th:text="${success == true ? 'Đánh giá thành công huấn luyện viên':''}"></p>
+                    </div>
+                    <div th:style="${coach_rating.ratingId != 0 ? 'pointer-events: none':''}" th:class="${complete == false ? 'evaluate-coach-content disabled':'evaluate-coach-content'}">
+                        <form class="form" id="form" th:action="@{/user/evaluate/save}" method="post"
+                              onsubmit="return confirm('Bạn có chắc chắn đánh giá huấn luỵện viên này ?')">
+                            <div class="form-title">
+                                <p>Form đánh giá</p>
+                            </div>
+                            <div class="describe">
+                                <div class="describe-1">
+                                    1 = Rất tệ
+                                </div>
+                                <div class="describe-2">
+                                    2 = Tệ
+                                </div>
+                                <div class="describe-3">
+                                    3 = Bình thường
+                                </div>
+                                <div class="describe-4">
+                                    4 = Tốt
+                                </div>
+                                <div class="describe-5">
+                                    5 = Rất tốt
+                                </div>
+                            </div>
+                            <div class="form-content">
+                                <input style="display: none" type="text" th:field="${coach_rating.ratingId}">
+                                <input style="display:none" type="text" th:field="${coach_rating.coachEntity.coachId}">
+                                <input style="display:none" type="text" th:field="${coach_rating.classEntity.classId}">
+                                <input style="display:none" type="text" th:field="${coach_rating.playerEntity.playerId}">
+                                <input style="display:none" type="text" id="the-date" th:name="'createDate'">
+                                <div class="form-item">
+                                    <div class="form-item__name">
+                                        <p>Coach Training</p>
+                                    </div>
+                                    <div class="form-item__evaluate">
+                                        <div class="form-item__radio" th:each="number : ${evaluate_number}">
+                                            <p th:text="${number}"></p>
+                                            <label class="radio-custom">
+                                                <input type="radio" name="coach_training" th:value="${number}"
+                                                       th:field="${coach_rating.coachTraining}">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-item__desc">
+                                        <p>Huấn luyện viên đã tận dụng tốt tất cả thời gian luyện tập và dạy kỹ năng cần
+                                            thiết
+                                            để cải thiện.</p>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <div class="form-item__name">
+                                        <p>Communication</p>
+                                    </div>
+                                    <div class="form-item__evaluate">
+                                        <div class="form-item__radio" th:each="number : ${evaluate_number}">
+                                            <p th:text="${number}"></p>
+                                            <label class="radio-custom">
+                                                <input type="radio" name="communication" th:value="${number}"
+                                                       th:field="${coach_rating.communication}">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-item__desc">
+                                        <p>Huấn luyện viên giao tiếp tốt với cầu thủ và phụ huynh, thưởng xuyên thông báo về
+                                            lịch tập luyện.</p>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <div class="form-item__name">
+                                        <p>Discipline</p>
+                                    </div>
+                                    <div class="form-item__evaluate">
+                                        <div class="form-item__radio" th:each="number : ${evaluate_number}">
+                                            <p th:text="${number}"></p>
+                                            <label class="radio-custom">
+                                                <input type="radio" name="discipline" th:value="${number}"
+                                                       th:field="${coach_rating.discipline}">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-item__desc">
+                                        <p>Huấn luyện viên luôn có mặt tại sân tập và luôn luôn theo sát trong quá trình cầu
+                                            thủ
+                                            tập luyện.</p>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <div class="form-item__name">
+                                        <p>Football Knowledge</p>
+                                    </div>
+                                    <div class="form-item__evaluate">
+                                        <div class="form-item__radio" th:each="number : ${evaluate_number}">
+                                            <p th:text="${number}"></p>
+                                            <label class="radio-custom">
+                                                <input type="radio" name="footballKnowledge" th:value="${number}"
+                                                       th:field="${coach_rating.footballKnowledge}">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-item__desc">
+                                        <p>Huấn luyện viên am hiểu và truyền đạt đầy đủ kiến thức, kinh nghiệm, kỹ năng cho
+                                            cầu
+                                            thủ.</p>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <div class="form-item__name">
+                                        <p>Overall Rating</p>
+                                    </div>
+                                    <div class="form-item__evaluate">
+                                        <div class="form-item__radio" th:each="number : ${evaluate_number}">
+                                            <p th:text="${number}"></p>
+                                            <label class="radio-custom">
+                                                <input type="radio" name="overallRating" th:value="${number}"
+                                                       th:field="${coach_rating.overallRating}">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-item__desc">
+                                        <p>Đánh giá tổng quan về sự hài lòng của bạn đối với huấn luyện viên.</p>
+                                    </div>
+                                </div>
+                                <div class="form-comment">
+                                    <div class="form-comment__name">
+                                        <p>Ý kiến khác</p>
+                                    </div>
+                                    <div class="form-comment__evaluate">
+                                        <input type="text" name="comment" id="comment"
+                                               th:field="${coach_rating.otherOpinion}">
+                                    </div>
+                                </div>
+                                <div class="form-btn" th:if="${coach_rating.ratingId == 0}">
+                                    <button id="btn" class="btn btn-submit disabled" type="submit"><i class="fa-solid fa-check"></i>Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="coach-information" id="coach-info">
+                            <div class="coach-information-image">
+                                <img th:src="@{'/player/dist/img/avatar/' + ${player.classEntity.coachEntity.avatar}}"
+                                     id="coach-img" alt="Coach Image">
+                            </div>
+                            <div class="coach-information-main">
+                                <p>Name : <span th:text="${player.classEntity.coachEntity.nameCoach}"></span></p>
+                                <p>Phone : <span th:text="${player.classEntity.coachEntity.phone}"></span></p>
+                                <p>Email : <span th:text="${player.classEntity.coachEntity.email}"></span></p>
+                                <p>Birthday : <span th:text="${player.classEntity.coachEntity.birthDay}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10)
+        month = "0" + month;
+    if (day < 10)
+        day = "0" + day;
+
+    var today = year + "-" + month + "-" + day;
+
+
+    document.getElementById('the-date').value = today;
+</script>
+<script th:src="@{/player/dist/js/loader.js}"></script>
+<script type="text/javascript" th:src="@{//code.jquery.com/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" th:src="@{//code.jquery.com/jquery-migrate-1.2.1.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        $("#class-btn").click(function () {
+            $("#my_coach").toggle();
+            $("#down").toggle();
+            $("#up").toggle();
+        });
+    });
+    $(function () {
+        $('input:radio[name="evaluate-coach"]').change(function () {
+            var playerId = $("#player_id").val();
+            var coachId = $("#coach_id").val();
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8085/api/coach/' + coachId,
+                enctype: 'application/json',
+                dataType: 'json',
+                processData: false,
+                cache: false,
+                contentType: false,
+                error: function (error) {
+                },
+                success: function (response) {
+                    $("#coach-info").css("display", "flex");
+                    $("#coach-img").src = '/player/dist/img/avatar/' + response.avatar;
+                }
+            })
+        });
+    });
+    function checkRadio() {
+        if(document.querySelector("input[name=coachTraining]:checked") === null
+            || document.querySelector("input[name=communication]:checked") === null
+            || document.querySelector("input[name=discipline]:checked") === null
+            || document.querySelector("input[name=footballKnowledge]:checked") === null
+            || document.querySelector("input[name=overallRating]:checked") === null){
+            $('#btn').addClass("disabled");
+        } else {
+            $('#btn').removeClass("disabled");
+        }
+    }
+    document.querySelectorAll(".form .form-item input[type='radio']").forEach((input) => {
+        input.addEventListener('change', checkRadio);
+    });
+</script>
+</html>

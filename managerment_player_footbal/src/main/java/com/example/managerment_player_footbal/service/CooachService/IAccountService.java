@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface IAccountService {
     List<Account> findAll();
+
+    Account findByAccountName(String accountName);
+
+     boolean isUsernameExists(String username);
+
+    Account createOrUpdate(Account account);
 }

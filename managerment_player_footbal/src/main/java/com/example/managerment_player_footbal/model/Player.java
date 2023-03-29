@@ -1,21 +1,26 @@
 package com.example.managerment_player_footbal.model;
 
 import com.example.managerment_player_footbal.model.account.Account;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Set;
 
 @Entity
+@Table(name = "player")
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "player_id")
+    private int playerId;
 
     private String name;
 
     private String avatar;
 
-    private Date birthday;
+    private java.sql.Date birthday;
 
     private Float weight;
 
@@ -23,41 +28,83 @@ public class Player {
 
     private String parentPhone;
 
+    @Column
+    private String position;
 
-    @OneToOne(targetEntity = Account.class)
-    @JoinColumn(name = "account_id", referencedColumnName = "accountId")
+    @OneToOne
+    @JoinColumn(name = "account_name", referencedColumnName = "account_name")
+    @JsonBackReference
     private Account account;
 
+    @OneToMany(mappedBy = "player")
+    @JsonManagedReference
+    private Set<PlayerRating> playerRatings;
 
     @ManyToOne
-    @JoinColumn(name = "class_id", referencedColumnName = "id")
+    @JoinColumn(name = "class_id", referencedColumnName = "class_id")
+//    @JsonBackReference
     private Classes classes;
+
+
+    @OneToMany(mappedBy = "playerEntity")
+    @JsonManagedReference
+    private Set<CoachRatingEntity> coachRatingEntities;
+
+    @ManyToMany()
+    @JsonBackReference
+    private Set<TeamEntity> teamEntities;
 
     public Player() {
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
+    public Player(int playerId, String name, String avatar, Date birthday, Float weight, Float height, String parentPhone, String position, Account account, Set<PlayerRating> playerRatings, Classes classes, Set<CoachRatingEntity> coachRatingEntities, Set<TeamEntity> teamEntities) {
+        this.playerId = playerId;
+        this.name = name;
+        this.avatar = avatar;
+        this.birthday = birthday;
+        this.weight = weight;
+        this.height = height;
+        this.parentPhone = parentPhone;
+        this.position = position;
         this.account = account;
-    }
-
-    public Classes getClasses() {
-        return classes;
-    }
-
-    public void setClasses(Classes classes) {
+        this.playerRatings = playerRatings;
         this.classes = classes;
+        this.coachRatingEntities = coachRatingEntities;
+        this.teamEntities = teamEntities;
     }
 
-    public int getId() {
-        return id;
+
+
+    public Set<CoachRatingEntity> getCoachRatingEntities() {
+        return coachRatingEntities;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCoachRatingEntities(Set<CoachRatingEntity> coachRatingEntities) {
+        this.coachRatingEntities = coachRatingEntities;
+    }
+
+    public Set<TeamEntity> getTeamEntities() {
+        return teamEntities;
+    }
+
+    public void setTeamEntities(Set<TeamEntity> teamEntities) {
+        this.teamEntities = teamEntities;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
     }
 
     public String getName() {
@@ -76,7 +123,7 @@ public class Player {
         this.avatar = avatar;
     }
 
-    public Date getBirthday() {
+    public java.sql.Date getBirthday() {
         return birthday;
     }
 
@@ -106,5 +153,29 @@ public class Player {
 
     public void setParentPhone(String parentPhone) {
         this.parentPhone = parentPhone;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Set<PlayerRating> getPlayerRatings() {
+        return playerRatings;
+    }
+
+    public void setPlayerRatings(Set<PlayerRating> playerRatings) {
+        this.playerRatings = playerRatings;
+    }
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
     }
 }
