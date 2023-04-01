@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>My Table</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+		header {
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  padding: 20px;
+		  background-color: #f5f5f5;
+		}
+		
+		h1 {
+		  font-size: 36px;
+		  margin: 0;
+		}
+		
+		p {
+		  font-size: 18px;
+		  margin: 0;
+		  color: #666;
+		}
+				
+		table {
+			border-collapse: collapse;
+			margin: 20px auto;
+			font-family: Arial, sans-serif;
+			width: 100%;
+			box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+			border-radius: 10px;
+			overflow: hidden;
+		}
+
+		table th {
+			background-color: #F2F2F2;
+			color: #333;
+			font-weight: bold;
+			padding: 10px;
+			text-align: left;
+			border: 1px solid #CCC;
+		}
+
+		table td {
+			padding: 10px;
+			text-align: left;
+			border: 1px solid #CCC;
+			font-size: 16px;
+			line-height: 1.4;
+		}
+	</style>
+</head>
+<body>
+	<header>
+	  <h1 th:text="${player.name}">John Doe</h1>
+	  <p th:text="${player.playerId}"></p>
+	</header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID bác sĩ</th>
+        <th>Tên bác sĩ</th>
+        <th>Triệu chứng</th>
+        <th>Nguyên nhân</th>
+        <th>Chuẩn đoán</th>
+        <th>Kết quả</th>
+        <th>Trị liệu</th>
+        <th>Ngày khám</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="report : ${reports}">
+      
+        <td>
+        	<a th:href="@{/doctor/{id}(id=${report.doctor.doctorId})}" th:text="${report.doctor.doctorId}">id</a>
+        </td>
+        <td th:text="${report.doctor.name}">Row 1, Column 3</td>
+        <td th:text="${report.symptom}">Row 1, Column 5</td>
+        <td th:text="${report.cause}">Row 1, Column 5</td>
+        <td th:text="${report.diagnosis}">Row 1, Column 5</td>
+        <td th:text="${report.testResult}">BMI (Placeholder)</td>
+        <td th:text="${report.treatment}"></td>
+        <td th:text="${report.reportDate}">Row 1, Column 5</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

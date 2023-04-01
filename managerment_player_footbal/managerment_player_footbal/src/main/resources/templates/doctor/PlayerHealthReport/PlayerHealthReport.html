@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Báo cáo sức khỏe</title>
+	<link rel="stylesheet" th:href="@{/styles.css}" />
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+			padding: 20px;
+		}
+
+		form {
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px #888;
+			max-width: 500px;
+			margin: 0 auto;
+		}
+
+		div[class="row"] {
+			display: flex;
+		}
+
+		h1 {
+			text-align: center;
+			margin-bottom: 30px;
+			color: #666;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			color: #666;
+
+		}
+
+		input[type="text"],
+		input[type="number"],
+		input[type="email"],
+		input[type="date"] textarea {
+			width: 100%;
+			padding: 10px 2px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-bottom: 20px;
+			font-size: 16px;
+			color: #333;
+		}
+
+		textarea {
+			height: 100px;
+		}
+
+		.center {
+			width: 85px;
+		}
+
+		button[type="submit"] {
+			background-color: green;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		button[type="submit"]:hover {
+			background-color: #009900;
+		}
+	</style>
+</head>
+
+<body>
+
+	<form method="post" th:action="@{/doctor/healthreport/report}" th:object="${report}">
+		<h1>Báo cáo sức khỏe</h1>
+
+		<p>
+		<div class="row">
+			<label class="center">Họ tên:</label>
+			<dd th:text="${report.player.name}"></dd>
+		</div>
+		</p>
+
+		<p>
+		<div class="row">
+			<label class="center">ID học sinh:</label>
+			<dd th:text="${report.player.playerId}"></dd>
+			<input type="hidden" name="playerId" th:field="*{player.playerId}" />
+		</div>
+		</p>
+
+		<p>
+		<div class="row">
+			<label  class="center">ID bác sĩ:</label>
+			<dd th:text="${report.doctor.doctorId}"></dd>
+			<input type="hidden" name="doctorId" th:field="*{doctor.doctorId}" />
+		</div>
+		</p>
+
+		<p>
+		<div>
+			<label>Cân nặng:</label>
+			<input type="number" name="weight" value="0" step="0.1" th:field="*{weight}" required>
+		</div>
+		</p>
+
+		<p>
+		<div>
+			<label >Chiều cao:</label>
+			<input type="number" name="height" value="0" step="0.1" th:field="*{height}" required>
+		</div>
+		</p>
+
+		<p>
+		<div>
+			<label>Cholesterol:</label>
+			<input type="number" name="cholesterol" value="0" step="1" th:field="*{cholesterol}" required>
+		</div>
+		</p>
+
+		<p>
+		<div>
+			<label>Nhịp tim:</label>
+			<input type="number" name="heartRate" value="0" step="1" th:field="*{heartRate}" required>
+		</div>
+		</p>
+
+		<label>Ngày khám:</label>
+		<input type="date" name="inspectDate" th:field="*{inspectDate}" required>
+
+		<button type="submit">Update</button>
+
+		<div th:each="error : ${errorStrings}">
+			<span th:text="${error}" style="color: rgb(108, 121, 157);"></span>
+		  </div>
+		
+	</form>
+</body>
+
+</html>

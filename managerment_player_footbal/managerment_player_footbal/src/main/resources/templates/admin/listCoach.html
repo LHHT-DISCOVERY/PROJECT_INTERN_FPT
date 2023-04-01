@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/admin/index :: head">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+            integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+            crossorigin="anonymous"
+    />
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+            integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+<div th:replace="/admin/index::aside"></div>
+
+<div
+        class="content-wrapper iframe-mode"
+        data-widget="iframe"
+        data-loading-screen="750"
+>
+    <div class="container-fluid bg-form">
+        <div class="row m-4 d-flex">
+            <h1 style="color: red" th:if="${message} != null"><span th:text="${message}"></span></h1>
+            <h1 style="color: #2bce2b" th:if="${messageUpdate} != null"><span th:text="${messageUpdate}"></span></h1>
+        </div>
+        <table class="table table-striped border table-hover">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Coach ID</th>
+                <th>Họ Tên</th>
+                <th>Ảnh Thẻ</th>
+                <th>Địa Chỉ</th>
+                <th>Ngày Sinh</th>
+                <th>Giới Tính</th>
+                <th>Số Điện Thoại</th>
+                <th>Email</th>
+                <th>Account</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="coach : ${coachList}" th:object="${coach}">
+                <td th:text="${coach.coachId}"></td>
+                <td th:text="${coach.nameCoach}"></td>
+                <td><img th:src="@{'/image/' + ${coach.avatar}}" alt="avatar" style="width: 80px ; height: 80px"></td>
+                <td th:text="${coach.address}"></td>
+                <td th:text="${coach.birthday}"></td>
+                <td th:text="${coach.gender} ? 'Nam' : 'Nữ'"></td>
+                <td th:text="${coach.phone}"></td>
+                <td th:text="${coach.email}"></td>
+                <td th:text="${coach.account.accountName}"></td>
+                <td>
+                    <div>
+                        <a th:href="@{/admin/updateCoach/{id}(id=*{coachId})}" class="btn btn-warning"
+
+                        ><i class="bi bi-pencil-square"></i
+                        ></a>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <button
+                                th:onclick="|deleteByModal('__${coach.coachId}__','__${coach.nameCoach}__')|"
+                                type="button"
+                                class="btn btn-danger"
+                                data-toggle="modal"
+                                data-target="#modalDelete"
+                        >
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="row justify-content-center m-md-auto">
+            <nav aria-label="Page navigation example ">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Modal delete-->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="formDelete" th:action="@{/admin/delete}" hidden=>
+                    <!--          lấy id => Name-->
+                    <input type="text" name="idCoach" id="idCoach">
+                </form>
+                Bạn có muốn xóa huấn luyện viên <input class="border-0" id="nameCoach"
+                                                       style="color: red ; font-weight: bold"> <span> Không ? </span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-danger" th:onclick="submitForm()">Có</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function deleteByModal(id, nameCoach) {
+        document.getElementById("idCoach").value = id;
+        document.getElementById("nameCoach").value = nameCoach;
+    }
+
+    function submitForm() {
+        document.getElementById("formDelete").submit();
+    }
+</script>
+</body>
+</html>
