@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/admin")
@@ -62,6 +63,7 @@ public class AccountController {
         account.setAccountName(accountForm.getAccountName());
         account.setPassword(passwordEncoder.encode(accountForm.getPassword()));
         Account userName = (iAccountService.findByAccountName(accountForm.getAccountName()));
+        Date day = accountForm.getBirthday() ;
         AccountValidate accountValidate = new AccountValidate();
         accountValidate.validate(accountForm, bindingResult);
         if (userName == null && !bindingResult.hasErrors()) {

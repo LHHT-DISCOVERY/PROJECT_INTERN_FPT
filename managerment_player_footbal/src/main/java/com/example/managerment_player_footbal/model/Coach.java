@@ -2,6 +2,7 @@ package com.example.managerment_player_footbal.model;
 
 
 import com.example.managerment_player_footbal.model.account.Account;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,8 +30,9 @@ public class Coach {
     @NotBlank(message = "avatar không được để trống")
     private String avatar;
 
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Ngày sinh không được để trống")
+    @NotNull(message = "Không được để trống")
     private Date birthday;
 
     @Pattern(regexp = "^(0)+([3-9][0-9]{8})$", message = "Số điện thoại phải đúng định dạng")
@@ -44,7 +46,7 @@ public class Coach {
     @NotBlank(message = "Địa chỉ không được để trống")
     private String address;
 
-    @OneToMany(mappedBy = "coach" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Classes> classes;
 
@@ -52,9 +54,24 @@ public class Coach {
     @JsonManagedReference
     private Set<PlayerRating> playerRatingSet;
 
-    @OneToOne(targetEntity = Account.class)
+    @OneToOne
     @JoinColumn(name = "account_name", referencedColumnName = "account_name")
+    @JsonBackReference
     private Account account;
+
+    public Coach(int coachId, Boolean gender, String nameCoach, String avatar, Date birthday, String phone, String email, String address, Set<Classes> classes, Set<PlayerRating> playerRatingSet, Account account) {
+        this.coachId = coachId;
+        this.gender = gender;
+        this.nameCoach = nameCoach;
+        this.avatar = avatar;
+        this.birthday = birthday;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.classes = classes;
+        this.playerRatingSet = playerRatingSet;
+        this.account = account;
+    }
 
     public Coach(Boolean gender, String nameCoach, String avatar, Date birthday, String phone, String email, String address, Account account) {
         this.gender = gender;
@@ -66,6 +83,8 @@ public class Coach {
         this.address = address;
         this.account = account;
     }
+
+
 
     public Coach() {
     }

@@ -3,11 +3,14 @@ package com.example.managerment_player_footbal.controller.playerController;
 
 import com.example.managerment_player_footbal.model.*;
 import com.example.managerment_player_footbal.model.account.Account;
+import com.example.managerment_player_footbal.model.medical.PlayerHealthReport.PlayerHealthReport;
 import com.example.managerment_player_footbal.model.reponse.ScheduleResponse;
+import com.example.managerment_player_footbal.repository.medical_repository.PlayerHealthRepository.PlayerHealthReportRepository;
 import com.example.managerment_player_footbal.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +33,13 @@ public class PlayerController {
 
     private final ICoachRatingService coachRatingService;
     private final IAccountService accountService;
+    private  final BCryptPasswordEncoder passwordEncoder ;
+    private final PlayerHealthReportRepository playerHealthReportRepository;
 
     @Autowired
     IAccountService iAccountService ;
 
-    public PlayerController(IPlayerService playerService, ICoachService coachService, IClassesService classService, IScheduleService scheduleService, ISubjectService subjectService, ICoachRatingService coachRatingService, IAccountService accountService) {
+    public PlayerController(IPlayerService playerService, ICoachService coachService, IClassesService classService, IScheduleService scheduleService, ISubjectService subjectService, ICoachRatingService coachRatingService, IAccountService accountService, BCryptPasswordEncoder passwordEncoder, PlayerHealthReportRepository playerHealthReportRepository, IAccountService iAccountService) {
         this.playerService = playerService;
         this.coachService = coachService;
         this.classService = classService;
@@ -42,6 +47,9 @@ public class PlayerController {
         this.subjectService = subjectService;
         this.coachRatingService = coachRatingService;
         this.accountService = accountService;
+        this.passwordEncoder = passwordEncoder;
+        this.playerHealthReportRepository = playerHealthReportRepository;
+        this.iAccountService = iAccountService;
     }
 
     @GetMapping()
@@ -62,6 +70,9 @@ public class PlayerController {
 //        double bmi = (double) medicalReportEntities.get(index).getWeight() /
 //                (((double) medicalReportEntities.get(index).getHeight() / 100 ) *
 //                        ((double) medicalReportEntities.get(index).getHeight() / 100 ));
+        List<PlayerHealthReport> playerHealthReports = playerHealthReportRepository.findAllByPlayerId(playerEntity.getPlayerId());
+        int index = playerHealthReports.size() - 1;
+        double bmi = playerHealthReports.get(index).getWeight() / (((double) playerHealthReports.get(index).getHeight() / 100) * ((double) playerHealthReports.get(index).getHeight() / 100));
         Coach coachEntity = coachService.findById(classEntity.getCoach().getCoachId());
         /* Lấy các thành viên Class */
         List<Player> playerEntities = playerService.findAllByIdClass(playerEntity.getClasses().getClassId());
@@ -74,8 +85,8 @@ public class PlayerController {
         model.addAttribute("schedules", schedules);
         model.addAttribute("subjects", subjects);
         model.addAttribute("percent", (double) Math.round(percent * 100) / 100);
-//        model.addAttribute("bmi",(double)Math.round(bmi * 100) / 100);
-//        model.addAttribute("medical_report",medicalReportEntities.get(index));
+        model.addAttribute("bmi",(double)Math.round(bmi * 100) / 100);
+        model.addAttribute("medical_report",playerHealthReports.get(index));
         model.addAttribute("members", playerEntities);
         model.addAttribute("name_class", classEntity.getClassName());
         return "user/home";
@@ -83,10 +94,10 @@ public class PlayerController {
 
     @GetMapping("/evaluate")
     public String evaluate(Model model) {
-        Player playerEntity = playerService.getByID(1);
-        Classes classEntity = classService.findAllByIdClass(playerEntity.getClasses().getClassId());
-        /* Lấy HLV */
-        Coach coachEntity = coachService.findById(classEntity.getCoach().getCoachId());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Account account = iAccountService.findByAccountName(username);
+        Player playerEntity = playerService.findByPlayerUserName(account.getAccountName());
         /* Kiểm tra xem học viên đã đánh giá HLV chưa */
         CoachRatingEntity coachRatingEntity =
                 coachRatingService.getByClassIdAndPlayerId(playerEntity.getClasses().getClassId(), playerEntity.getPlayerId());
@@ -99,12 +110,13 @@ public class PlayerController {
         } else {
             model.addAttribute("coach_rating", coachRatingEntity);
         }
-        model.addAttribute("complete", System.currentTimeMillis() >= playerEntity.getClasses().getEndDate().getTime());
-        model.addAttribute("coachEntity", coachEntity);
+        boolean complete = System.currentTimeMillis() >= playerEntity.getClasses().getEndDate().getTime();
+        model.addAttribute("complete", complete);
+        model.addAttribute("coachEntity", playerEntity.getClasses().getCoach());
         model.addAttribute("player", playerEntity);
         model.addAttribute("coaches", coachService.findAll());
         model.addAttribute("evaluate_number", new Integer[]{1, 2, 3, 4, 5});
-        model.addAttribute("class", classEntity);
+        model.addAttribute("class", playerEntity.getClasses());
         return "user/evaluate";
     }
 
@@ -117,7 +129,11 @@ public class PlayerController {
 
     @GetMapping("/profile")
     public String profile(Model model) {
-        Player playerEntity = playerService.getByID(1);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Account account = iAccountService.findByAccountName(username);
+        Player player = playerService.findByPlayerUserName(account.getAccountName());
+        Player playerEntity = playerService.getByID(player.getPlayerId());
         List<Classes> classEntities = classService.findAll();
         model.addAttribute("player", playerEntity);
         model.addAttribute("classes", classEntities);
@@ -126,6 +142,7 @@ public class PlayerController {
 
     @PostMapping("/profile/account/save")
     public String save(@ModelAttribute("player") Player playerEntity, RedirectAttributes ra) {
+        playerEntity.getAccount().setPassword(passwordEncoder.encode(playerEntity.getAccount().getPassword()));
         Account accountEntity = accountService.createOrUpdate(playerEntity.getAccount());
         ra.addFlashAttribute("success", true);
         return "redirect:/user/profile";

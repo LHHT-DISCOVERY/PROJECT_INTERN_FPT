@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>List Player</title>
+	<style>
+		* {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			background-image: url(https://img5.thuthuatphanmem.vn/uploads/2021/07/09/hinh-nen-san-van-dong-cup-c1_025305307.jpg);
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		form {
+			max-width: 600px;
+			margin: 40px auto;
+			padding: 30px;
+			background-color: #ffffff;
+			box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+			border-radius: 10px;
+		}
+
+		h1 {
+			font-size: 36px;
+			margin-bottom: 20px;
+			text-align: center;
+			text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.4);
+		}
+
+		label {
+			display: block;
+			font-size: 16px;
+			font-weight: 600;
+			margin-bottom: 10px;
+			color: #495057;
+		}
+
+		input[type='number'], input[type='text'], input[type='date'] {
+			width: 100%;
+			padding: 12px;
+			border-radius: 5px;
+			border: none;
+			background-color: #f5f5f5;
+			margin-bottom: 20px;
+			color: #495057;
+			opacity: 0.9;
+		}
+
+		input[type='number']:focus, input[type='text']:focus, input[type='date']:focus {
+			outline: none;
+			box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+			opacity: 1;
+		}
+
+		input[type='submit'] {
+			display: block;
+			width: 100%;
+			padding: 12px;
+			background-color: #007bff;
+			color: #ffffff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		input[type='submit']:hover {
+			background-color: #0069d9;
+		}
+
+		.back-button {
+			color: black;
+			border: none;
+			font-size: 20px;
+			font-weight: bold;
+			line-height: 40px;
+			text-align: center;
+			cursor: pointer;
+		}
+		@media screen and (max-width: 768px) {
+			form {
+				max-width: 100%;
+				margin: 20px;
+			}
+		}
+		#avatarInput{
+      margin-bottom: 10px;
+    }
+
+    #preview {
+      max-width: 100px;
+      max-height: 400px;
+    }
+	</style>
+</head>
+<body>
+	<form th:action="@{classes/create-player}" method="post" enctype="multipart/form-data">
+		<h1>Thêm mới học viên</h1>
+
+		<label for="name">Name</label>
+		<input type="text" id="name" name="name">
+
+		<label for="avatar">Ảnh thẻ</label>
+		<input type="file" id="avatarInput" name="avatar" onchange="displayImage()">
+		<br>
+    	<img id="preview" src="" >
+		
+		<label for="classes">Lớp học</label>
+        <select id="classes" name="clases" required>
+            <option value="">-- Chọn lớp học --</option>
+            <option th:each="class : ${classes}"
+                    th:value="${class.getClassId()}"
+                    th:text="${class.getClassName()} + ' ' + ${class.getClassId()} "></option>
+        </select>
+        <label for="username">username</label>
+		<input type="text" id="username" name="username">
+		
+		<label for="birthdate">Birthdate</label>
+		<input type="date" id="birthday" name="birthday">
+
+		<label for="weight">Weight</label>
+		<input type="number" id="weight" name="weight">
+
+		<label for="height">Height</label>
+		<input type="number" id="height" name="height">
+
+		<label for="position">Vị trí thi đấu</label>
+		<input type="text" id="position" name="position">
+		
+		<label for="parentPhone">SDT phụ huynh</label>
+		<input type="number" id="parentPhone" name="parentPhone">
+		<input type="submit" value="Submit">
+		
+	</form>
+	<script>
+    function displayImage() {
+      let preview = document.querySelector("#preview");
+      let file = document.querySelector("#avatarInput").files[0];
+      let reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+      }, false);
+      
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -45,18 +45,18 @@
                                     <i class="fa-solid fa-caret-down" id="down"></i>
                                 <i style="display: none; margin-top: 5px" class="fa-solid fa-caret-up" id="up"></i>
                                 </div>
-                                <p th:text="${player.classEntity.className}"></p></span>
+                                <p th:text="${player.classes.className}"></p></span>
                         </label>
                         <div class="class-coach" id="my_coach">
                             <div class="coach-item active">
                                 <div class="coach-name">
-                                    <input type="text" th:field="${player.classEntity.coachEntity.coachId}"
+                                    <input type="text" th:field="${player.classes.coach.coachId}"
                                            style="display: none" id="coach_id">
                                     <input type="text" th:field="${player.playerId}" style="display: none"
                                            id="player_id">
-                                    <img th:src="@{'/player/dist/img/avatar/' +${player.classEntity.coachEntity.avatar}}"
+                                    <img th:src="@{'/image/'+${player.classes.coach.avatar}}"
                                          alt="HLV trưởng">
-                                    <p th:text="${player.classEntity.coachEntity.nameCoach}"></p>
+                                    <p th:text="${player.classes.coach.nameCoach}"></p>
                                 </div>
                                 <label>
                                     <input type="radio" id="coach-form" name="evaluate-coach" style="display: none"
@@ -110,7 +110,7 @@
                             <div class="form-content">
                                 <input style="display: none" type="text" th:field="${coach_rating.ratingId}">
                                 <input style="display:none" type="text" th:field="${coach_rating.coachEntity.coachId}">
-                                <input style="display:none" type="text" th:field="${coach_rating.classEntity.classId}">
+                                <input style="display:none" type="text" th:field="${coach_rating.classes.classId}">
                                 <input style="display:none" type="text" th:field="${coach_rating.playerEntity.playerId}">
                                 <input style="display:none" type="text" id="the-date" th:name="'createDate'">
                                 <div class="form-item">
@@ -227,14 +227,14 @@
                         </form>
                         <div class="coach-information" id="coach-info">
                             <div class="coach-information-image">
-                                <img th:src="@{'/player/dist/img/avatar/' + ${player.classEntity.coachEntity.avatar}}"
+                                <img th:src="@{'/image/'+${player.classes.coach.avatar}}"
                                      id="coach-img" alt="Coach Image">
                             </div>
                             <div class="coach-information-main">
-                                <p>Name : <span th:text="${player.classEntity.coachEntity.nameCoach}"></span></p>
-                                <p>Phone : <span th:text="${player.classEntity.coachEntity.phone}"></span></p>
-                                <p>Email : <span th:text="${player.classEntity.coachEntity.email}"></span></p>
-                                <p>Birthday : <span th:text="${player.classEntity.coachEntity.birthDay}"></span></p>
+                                <p>Name : <span th:text="${player.classes.coach.nameCoach}"></span></p>
+                                <p>Phone : <span th:text="${player.classes.coach.phone}"></span></p>
+                                <p>Email : <span th:text="${player.classes.coach.email}"></span></p>
+                                <p>Birthday : <span th:text="${player.classes.coach.birthday}"></span></p>
                             </div>
                         </div>
                     </div>

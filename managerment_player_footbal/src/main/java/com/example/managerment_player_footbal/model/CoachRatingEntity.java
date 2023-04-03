@@ -15,7 +15,7 @@ public class CoachRatingEntity {
     @ManyToOne
     @JoinColumn(name = "class_id", referencedColumnName = "class_id")
     @JsonBackReference
-    private Classes Classes;
+    private Classes classes;
     @ManyToOne
     @JoinColumn(name = "coach_id", referencedColumnName = "coach_id")
     @JsonBackReference
@@ -53,11 +53,11 @@ public class CoachRatingEntity {
     }
 
     public Classes getClasses() {
-        return Classes;
+        return classes;
     }
 
-    public void setClasses(com.example.managerment_player_footbal.model.Classes classes) {
-        Classes = classes;
+    public void setClasses(Classes classes) {
+        this.classes = classes;
     }
 
     public Coach getCoachEntity() {

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Update Player Information</title>
+    <style>
+        body {
+            background-image: url("https://png.pngtree.com/background/20210711/original/pngtree-guild-wars-world-cup-soccer-background-template-picture-image_1127634.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin: 50px auto;
+            padding: 20px;
+            width: 50%;
+        }
+        label {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            border-radius: 5px;
+            height: 30px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+            width: 100%;
+        }
+        option {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cập nhật thông tin học viên</h1>
+    <form  th:object="${player}" method="post" th:action="@{admin/{id}/update-info(id=${player.playerId})}">
+    <input type="hidden" th:field="*{playerId}"/>
+        <label for="name">Tên học viên:</label>
+        <input type="text" id="name" th:field="*{name}" name="name" required="required"/><br>
+        <label for="avatarInput">Ảnh thẻ</label>
+		<input type="file" id="avatarInput" name="avatar" onchange="displayImage()">
+		<br>
+    	<img id="preview" src="" >
+    	<label for="classes">Lớp học</label>
+        <select id="classes" name="classesId" required>
+            <option  value="">-- Chọn lớp học --</option>
+            <option th:each="class : ${classes}"
+                    th:value="${class.getClassId()}"
+                    th:text="${class.getClassName()} "></option>
+        </select>
+        <label for="birthday">Birthdate</label>
+		<input type="date" id="birthday" th:field="*{birthday}" name="birthday" >
+       
+       <label for="weight">Weight</label>
+		<input type="number" id="weight" th:field="*{weight}" name="weight">
+		<label for="height">Height</label>
+		<input type="number" id="height" th:field="*{height}" name="height">
+		
+		<label for="position">Vị trí thi đấu</label>
+		<input type="text" id="position" th:field="*{position}" name="position">
+		
+		
+		<label for="parentPhone">Parent Phone</label>
+		<input type="number" id="parentPhone" th:field="*{parentPhone}" name="parentPhone">
+        <button type="submit">Update</button>
+    </form>
+
+</body>
+</html>
+

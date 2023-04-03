@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -39,8 +40,9 @@ public class ClassController {
     public String showListClass(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
+        List<Classes> classesList = iClassesService.findAll();
         model.addAttribute("userName", username);
-        model.addAttribute("listClass", iClassesService.findAll());
+        model.addAttribute("listClass", classesList);
         return "admin/listClass";
     }
 

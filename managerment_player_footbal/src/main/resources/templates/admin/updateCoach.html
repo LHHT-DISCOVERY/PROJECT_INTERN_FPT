@@ -60,36 +60,23 @@
                                         aria-describedby="nameError"
                                         th:field="*{nameCoach}"
                                 />
+                                <p class="text-danger" th:if="${#fields.hasErrors('nameCoach')}"
+                                   th:errors="*{nameCoach}"></p>
                             </div>
                         </div>
 
-<!--                        <div class="row mb-3 divder my-5">-->
-<!--                            <div class="col-4">-->
-<!--                                <label for="position" class="form-label Text-cloer form-label Text-cloer">Chọn Account-->
-<!--                                    Phù-->
-<!--                                    Hợp: </label>-->
-<!--                            </div>-->
-<!--                            <div class="col-8">-->
-<!--                                <select th:field="*{account}" id="position" required>-->
-<!--                                    <option selected value="">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
-<!--                                    <option th:each="acc : ${accountList}"-->
-<!--                                            th:value="${acc.accountName}"-->
-<!--                                            th:text="${acc.accountName}"></option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
                         <div class="row mb-3">
                             <div class="col-4">
-                                <label hidden="hidden" for="description" class="Text-cloer form-label"> ẢNh Thẻ</label>
+                                <label  for="description" class="Text-cloer form-label"> ẢNh Thẻ</label>
                             </div>
                             <div class="col-8">
-                                <input hidden="hidden"
-                                        type="file"
-                                        class="form-control"
-                                        th:field="*{avatar}"
-                                        aria-describedby="descriptionError"
+                                <input
+                                       type="file"
+                                       class="form-control"
+                                       th:field="*{avatar}"
+                                       aria-describedby="descriptionError"
                                 />
+                                <p class="text-danger" th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}"></p>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -103,6 +90,8 @@
                                         th:field="*{address}"
                                         aria-describedby="descriptionError"
                                 >
+                                <p class="text-danger" th:if="${#fields.hasErrors('address')}"
+                                   th:errors="*{address}"></p>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -113,6 +102,7 @@
                                 <div class="col-1"></div>
                                 <div class="col-8">
                                     <div class="form-group">
+
                                         <div class="form-line m-4">
                                             <input
                                                     th:field="*{gender}"
@@ -134,6 +124,8 @@
                                             />
                                             <label class="Text-cloer"> Nữ </label>
                                         </div>
+                                        <p class="text-danger" th:if="${#fields.hasErrors('gender')}"
+                                           th:errors="*{gender}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -150,6 +142,8 @@
 
                                         aria-describedby="descriptionError"
                                 />
+                                <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -163,6 +157,9 @@
                                         class="form-control"
                                         aria-describedby="descriptionError"
                                 />
+                                <p class="text-danger" th:if="${#fields.hasErrors('birthday')}"
+                                   th:errors="*{birthday}"></p>
+
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -177,6 +174,8 @@
                                         id="description"
                                         aria-describedby="descriptionError"
                                 />
+                                <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
                             </div>
                         </div>
 

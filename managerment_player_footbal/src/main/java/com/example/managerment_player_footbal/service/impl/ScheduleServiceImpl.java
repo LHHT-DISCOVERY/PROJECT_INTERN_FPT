@@ -33,10 +33,10 @@ public class ScheduleServiceImpl implements IScheduleService {
             response.setClassId(entity.getClassId());
             response.setSubjectId(entity.getSubjectId());
             response.setScheduleDate(entity.getScheduleDate());
-            response.setStartTime((String.format("%02d",entity.getStartTime().getHours() + 1)) + ":" +
+            response.setStartTime((String.format("%02d",entity.getStartTime().getHours())) + ":" +
                     (String.format("%02d",entity.getStartTime().getMinutes())) +
                     (entity.getStartTime().toLocalTime().getHour() > 12 ? " PM" : " AM"));
-            response.setEndTime((String.format("%02d",entity.getEndTime().getHours() + 1)) + ":" +
+            response.setEndTime((String.format("%02d",entity.getEndTime().getHours())) + ":" +
                     (String.format("%02d",entity.getEndTime().getMinutes())) +
                     (entity.getEndTime().toLocalTime().getHour() > 12 ? " PM" : " AM"));
             response.setLocation(entity.getLocation());

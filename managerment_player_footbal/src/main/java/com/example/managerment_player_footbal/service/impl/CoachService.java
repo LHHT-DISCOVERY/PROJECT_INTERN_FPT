@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CoachService implements ICoachService {
@@ -17,7 +18,8 @@ public class CoachService implements ICoachService {
 
     @Override
     public List<Coach> findAll() {
-        return iCoachRepository.findAll();
+        List<Coach> coaches = iCoachRepository.getAll();
+        return coaches;
     }
 
     @Override

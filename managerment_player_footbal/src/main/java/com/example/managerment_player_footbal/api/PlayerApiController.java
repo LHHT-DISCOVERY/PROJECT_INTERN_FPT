@@ -6,10 +6,7 @@ import com.example.managerment_player_footbal.service.IPlayerService;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
@@ -27,6 +24,13 @@ public class PlayerApiController {
 
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Player> update(PlayerRequest playerRequest){
+        Player player = playerService.save(playerRequest) ;
         return ResponseEntity.ok(playerService.save(playerRequest));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Player> get(@PathVariable String id){
+        Player player = playerService.getByID(Integer.parseInt(id));
+        return ResponseEntity.ok(player);
     }
 }

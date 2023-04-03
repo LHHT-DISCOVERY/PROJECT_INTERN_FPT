@@ -29,6 +29,12 @@ public class CoachController {
     IAccountService iAccountService;
 
 
+    public CoachController(IAccountRoleService iAccountRoleService, ICoachService iCoachService, IAccountService iAccountService) {
+        this.iAccountRoleService = iAccountRoleService;
+        this.iCoachService = iCoachService;
+        this.iAccountService = iAccountService;
+    }
+
     @GetMapping("/listCoach")
     public String showListCoach(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -44,8 +50,9 @@ public class CoachController {
     public String showFormUpdate( @PathVariable int id, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
+        Coach coach= iCoachService.findById(id);
         model.addAttribute("userName", username);
-        model.addAttribute("coach", iCoachService.findById(id));
+        model.addAttribute("coach", coach);
         model.addAttribute("accountList", iAccountService.findAll());
         return "admin/updateCoach";
     }
@@ -55,7 +62,6 @@ public class CoachController {
         if(bindingResult.hasErrors()){
             return "admin/updateCoach";
         }
-
         iCoachService.createOrUpdateCoach(coach);
         redirectAttributes.addFlashAttribute("messageUpdate", "Cập nhật thành công");
         return "redirect:/admin/listCoach";

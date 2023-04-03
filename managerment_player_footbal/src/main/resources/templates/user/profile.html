@@ -52,28 +52,24 @@
                                 <div class="profile-information-wrapper">
                                     <div class="profile-information__content">
                                         <div class="form-edit" style="display: none">
-                                            <label>ID</label>
+                                            <label for="player_id">ID</label>
                                             <input type="text" id="player_id" th:field="${player.playerId}">
                                         </div>
-                                        <div class="form-edit" style="display: none">
-                                            <label>Account</label>
-                                            <input type="text" id="account_id" th:field="${player.account.accountName}">
+                                        <div class="form-edit">
+                                            <label for="full_name">Họ tên</label>
+                                            <input type="text" id="full_name" th:field="${player.name}">
                                         </div>
                                         <div class="form-edit" style="display: none">
-                                            <label>Class</label>
+                                            <label for="class_id">Class</label>
                                             <input type="text" id="class_id" th:field="${player.classes.classId}">
                                         </div>
                                         <div class="form-edit">
-                                            <label>Họ tên</label>
-                                            <input type="text" id="full_name" th:field="${player.name}">
-                                        </div>
-                                        <div class="form-edit">
-                                            <label>Tên đăng nhập</label>
+                                            <label for="my_username">Tên đăng nhập</label>
                                             <input type="text" id="my_username" th:field="${player.account.accountName}"
                                                    disabled>
                                         </div>
                                         <div class="form-edit">
-                                            <label>Mật khẩu</label>
+                                            <label for="my_pass">Mật khẩu</label>
                                             <input disabled type="password" id="my_pass"
                                                    th:value="${player.account.password}" th:name="'password'">
                                             <label class="display-password">
@@ -93,27 +89,27 @@
                                             </script>
                                         </div>
                                         <div class="form-edit">
-                                            <label>Vị trí</label>
+                                            <label for="my_position">Vị trí</label>
                                             <input type="text" id="my_position" th:field="${player.position}"
                                                    disabled>
                                         </div>
                                         <div class="form-edit">
-                                            <label>Huấn luyện viên</label>
+                                            <label for="my_coach">Huấn luyện viên</label>
                                             <input type="text" id="my_coach"
                                                    th:field="${player.classes.coach.nameCoach}"
                                                    disabled>
                                         </div>
                                         <div class="form-edit">
-                                            <label>Class</label>
+                                            <label for="my_class">Class</label>
                                             <input type="text" id="my_class" th:field="${player.classes.className}"
                                                    disabled>
                                         </div>
                                         <div class="form-edit">
-                                            <label>Ngày sinh</label>
+                                            <label for="my_date">Ngày sinh</label>
                                             <input type="date" id="my_date" th:field="${player.birthday}">
                                         </div>
                                         <div class="form-edit">
-                                            <label>SĐT</label>
+                                            <label for="parent_phone">SĐT</label>
                                             <input type="text" id="parent_phone" th:field="${player.parentPhone}">
                                         </div>
                                     </div>
@@ -142,10 +138,6 @@
                                     <div class="profile-information__content">
                                         <div class="form-edit" style="display: none">
                                             <label>Account</label>
-                                            <input type="text" th:field="${player.account.accountName}">
-                                        </div>
-                                        <div class="form-edit" style="display: none">
-                                            <label>Username</label>
                                             <input type="text" th:field="${player.account.accountName}">
                                         </div>
                                         <div class="form-edit">
@@ -216,7 +208,7 @@
                                             <td th:text="${class.coach.nameCoach}"></td>
                                             <td><img
                                                     style="height: 60px;width: 60px;object-fit: cover;border-radius: 5px;"
-                                                    th:src="@{'/player/dist/img/avatar/' + ${class.coach.avatar}}"
+                                                    th:src="@{'/image/' + ${class.coach.avatar}}"
                                                     alt=""></td>
                                             <td th:text="${class.capacity}"></td>
                                             <td th:text="${class.className}"></td>
@@ -252,16 +244,19 @@
     $("#saveBtn").click(function () {
         var player_id = $('#player_id').val();
         var full_name = $('#full_name').val();
-        var account_id = $('#account_id').val();
+        var account_id = $('#my_username').val();
         var birth = $('#my_date').val();
         var parent_phone = $('#parent_phone').val();
         var class_id = $("#class_id").val();
         var position = $("#my_position").val();
+        var token = $("meta[name = '_csrf']").attr("content");
+        var header = $("meta[name = '_csrf_header']").attr("content");
+        console.log(token);
 
         var playerRequest = new FormData();
         playerRequest.append("playerId", player_id);
-        playerRequest.append("accountId", account_id);
-        playerRequest.append("classId", class_id);
+        playerRequest.append("classId", account_id);
+        playerRequest.append("accountName", class_id);
         playerRequest.append("name", full_name);
         playerRequest.append("birthDay", birth);
         playerRequest.append("parentPhone", parent_phone);
@@ -270,10 +265,20 @@
         if (upload.files[0] !== undefined) {
             playerRequest.append("avatar", upload.files[0]);
         }
+        console.log(playerRequest.get("playerId"));
+        console.log(playerRequest.get("classId"));
+        console.log(playerRequest.get("accountName"));
+        console.log(playerRequest.get("name"));
+        console.log(playerRequest.get("birthDay"));
+        console.log(playerRequest.get("parentPhone"));
+        console.log(playerRequest.get("position"));
         $.ajax({
             type: 'PUT',
             url: 'http://localhost:8080/api/user',
             data: playerRequest,
+            beforeSend : function (xhr) {
+                xhr.setRequestHeader(header,token)
+            },
             enctype: 'multipart/form-data',
             processData: false,
             cache: false,

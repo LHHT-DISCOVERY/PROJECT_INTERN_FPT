@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo Lớp Học</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://png.pngtree.com/background/20210711/original/pngtree-guild-wars-world-cup-soccer-background-template-picture-image_1127634.jpg');
+            background-size: cover; 
+            background-repeat: no-repeat;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            margin: 50px auto;
+            width: 60%;
+            padding: 20px;
+            border: 2px solid #CCC;
+            border-radius: 10px;
+            background-color: white;
+            opacity: 0.8;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #CCC;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <h2>Thêm mới lớp học</h2>
+    <form method="post" action="/admin/classes/create">
+        <label for="class-name">Tên Lớp Học:</label>
+        <input type="text" id="class-name" name="className" required>
+
+        <label for="capacity">Số lượng học viên:</label>
+        <input type="number" id="capacity" name="capacity" required>
+
+        <label for="startTime">Thời Gian Bắt Đầu:</label>
+        <input type="date" id="startTime" name="startTime" required>
+
+        <label for="endTime">Thời Gian Kết Thúc:</label>
+        <input type="date" id="endTime" name="endTime" required>
+
+        <label for="coach">HLV:</label>
+        <select id="coach" name="coach" required>
+            <option value="">-- Chọn HLV --</option>
+            <option th:each="coach : ${coaches}"
+                    th:value="${coach.getCoachId()}"
+                    th:text="${coach.getNameCoach()} + ' - ' + ${coach.getCoachId()} "></option>
+        </select>
+
+        <button type="submit">Tạo Lớp Học</button>
+    </form>
+</body>
+</html> 

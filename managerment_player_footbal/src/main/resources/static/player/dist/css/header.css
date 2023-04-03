@@ -8,6 +8,7 @@
     justify-content: space-evenly;
     position: fixed;
     height: 100%;
+    align-items: center;
 }
 
 .player-menu a {
@@ -22,6 +23,17 @@
 
 .player-menu .player-menu__logout {
     display: flex;
+}
+.player-menu .player-menu__logout form button {
+    background: transparent;
+    color: white;
+    border: transparent;
+    font-size: 17px;
+    cursor: pointer;
+}
+.player-menu .player-menu__logout form button:hover{
+    transform: scale(2);
+    transition: 0.2s linear;
 }
 
 .player-menu .player-menu__redirect a img {

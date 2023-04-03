@@ -5,6 +5,9 @@ import com.example.managerment_player_footbal.model.medical.Doctor.Doctor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -22,10 +25,29 @@ public class MedicalReport {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
+    @NotNull(message = "Triệu chứng không được để trống")
+    @NotEmpty(message = "Triệu chứng không được chứa duy nhất các khoảng trống")
+    @NotBlank(message = "Triệu chứng không được để trống")
     private String symptom;
+
+    @NotNull(message = "Chuẩn đoán không được để trống")
+    @NotEmpty(message = "Chuẩn đoán không được chứa duy nhất các khoảng trống")
+    @NotBlank(message = "Chuẩn đoán không được để trống")
     private String diagnosis;
+
+    @NotNull(message = "Nguyên nhân không được để trống")
+    @NotEmpty(message = "Nguyên nhân không được chứa duy nhất các khoảng trống")
+    @NotBlank(message = "Nguyên nhân không được để trống")
     private String cause;
+
+    @NotNull(message = "Kết quả không được để trống")
+    @NotEmpty(message = "Kết quả không được chứa duy nhất các khoảng trống")
+    @NotBlank(message = "Kết quả không được để trống")
     private String testResult;
+
+    @NotNull(message = "Trị liệu không được để trống")
+    @NotEmpty(message = "Trị liệu không được chứa duy nhất các khoảng trống")
+    @NotBlank(message = "Trị liệu không được để trống")
     private String treatment;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

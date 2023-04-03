@@ -1,9 +1,11 @@
 body {
     margin: 0;
 }
+
 .color-red {
     color: red;
 }
+
 .wrapper {
     font-family: 'Poppins', sans-serif;
 }
@@ -68,19 +70,23 @@ body {
     align-items: center;
     justify-content: space-between;
 }
+
 .evaluate .content .title .title-name {
     display: flex;
     align-items: center;
     gap: 20px;
 }
+
 .evaluate .content .title .title-name img {
     width: 45px;
     height: 45px;
     object-fit: cover;
 }
+
 .evaluate .content .title .title-name p {
     margin: 0;
 }
+
 .evaluate .content .title .account {
     display: flex;
     align-items: center;
@@ -89,6 +95,7 @@ body {
     border: 1px solid transparent;
     border-radius: 20px;
 }
+
 .evaluate .content .title .account:hover {
     background: white;
     border: 1px solid lavender;
@@ -96,35 +103,42 @@ body {
     cursor: pointer;
     transition: 0.2s linear;
 }
+
 .evaluate .content .title .account p {
     font-size: 16px;
     font-weight: bold;
     text-transform: capitalize;
 }
+
 .evaluate .content .title .account .account-image {
     height: 45px;
     width: 45px;
 }
+
 .evaluate .content .title .account .account-image img {
     height: 100%;
     border-radius: 50%;
     width: 100%;
     object-fit: cover;
 }
+
 .evaluate .content .main {
     display: flex;
     margin: 30px 0px;
     gap: 30px;
 }
+
 .evaluate .content .main .class {
 
 }
+
 .evaluate .content .main .class .class-item {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 300px;
 }
+
 .evaluate .content .main .class .class-item .class-name {
     padding: 15px 60px;
     background: #cdd5ff;
@@ -136,14 +150,17 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .evaluate .content .main .class .class-item .class-name span {
     display: flex;
     align-items: center;
 }
+
 .evaluate .content .main .class .class-item .class-name span i {
     font-size: 20px;
     margin-right: 10px;
 }
+
 .evaluate .content .main .class .class-item .class-coach {
     display: flex;
     background: white;
@@ -151,21 +168,24 @@ body {
     border: 1px solid skyblue;
     border-radius: 10px;
 }
+
 .evaluate .content .main .class .class-item .class-coach .coach-item {
     display: flex;
     align-items: center;
     gap: 20px;
     font-weight: bold;
 }
+
 .evaluate .content .main .class .class-item .class-coach .coach-item label {
     position: relative;
     width: 20px;
     height: 20px;
     border-radius: 5px;
     border: 2px solid black;
-    left: 30px;
+    left: 0;
     cursor: pointer;
 }
+
 .evaluate .content .main .class .class-item .class-coach .coach-item label span {
     width: 16px;
     height: 16px;
@@ -176,22 +196,26 @@ body {
     opacity: 0;
     visibility: hidden;
 }
+
 .evaluate .content .main .class .class-item .class-coach .coach-item label input:checked + span {
     opacity: 1;
     visibility: visible;
     transition: all 0.2s linear;
 }
+
 .evaluate .content .main .class .class-item .class-coach .coach-item .coach-name {
     display: flex;
     gap: 20px;
     align-items: center;
 }
+
 .evaluate .content .main .class .class-item .class-coach .coach-item img {
     height: 60px;
     width: 60px;
     object-fit: cover;
     border-radius: 50%;
 }
+
 .evaluate .content .main .evaluate-coach-content {
     display: flex;
     flex: 1;
@@ -199,6 +223,7 @@ body {
     border-radius: 20px;
     overflow: hidden;
 }
+
 .evaluate .content .main .evaluate-coach-content .coach-information {
     align-self: self-start;
     padding: 30px;
@@ -206,26 +231,31 @@ body {
     flex-direction: column;
     background: #fafafa;
 }
-.evaluate .content .main .evaluate-coach-content .coach-information .coach-information-image{
+
+.evaluate .content .main .evaluate-coach-content .coach-information .coach-information-image {
     width: 200px;
     height: 200px;
     align-self: center;
 }
+
 .evaluate .content .main .evaluate-coach-content .coach-information .coach-information-image img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
     object-fit: cover;
 }
+
 .evaluate .content .main .evaluate-coach-content .coach-information .coach-information-main p {
     font-size: 16px;
     font-weight: bold;
     transform: translateX(10px);
     white-space: nowrap;
 }
+
 .evaluate .content .main .evaluate-coach-content .coach-information .coach-information-main p span {
     font-weight: normal;
 }
+
 .evaluate .content .main .coach {
     display: flex;
     align-self: start;
@@ -242,19 +272,23 @@ body {
     max-height: 500px;
     overflow-y: scroll;
 }
+
 .evaluate .content .main .coach .list-coach::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 }
+
 .evaluate .content .main .coach .list-coach::-webkit-scrollbar-track {
     background: #e6e6e6;
 }
+
 .evaluate .content .main .coach .list-coach::-webkit-scrollbar-thumb {
     background: #1F95EE;
     border-radius: 5px;
 }
+
 .evaluate .content .main .coach .list-coach::-webkit-scrollbar-thumb:hover {
-    background: #4075cb; 
+    background: #4075cb;
 }
 
 .evaluate .content .main .coach .list-coach .coach-item {
@@ -268,18 +302,21 @@ body {
     border: 1px solid transparent;
     white-space: nowrap;
 }
+
 .evaluate .content .main .coach .list-coach .coach-item:hover {
     transform: scale(1.12);
     transition: all 0.2s linear;
     cursor: pointer;
     border: 1px solid #de8c8c;
 }
+
 .evaluate .content .main .coach .coach-item.active {
     transform: scale(1.12);
     transition: all 0.2s linear;
     cursor: pointer;
     border: 1px solid #de8c8c;
 }
+
 .evaluate .content .main .coach .list-coach .coach-item .coach-name {
     display: flex;
     align-items: center;
@@ -321,6 +358,7 @@ body {
     transition: 0.25s ease;
     box-shadow: inset 0 0 0 0.125em #F32020;
 }
+
 .evaluate .content .main .coach .list-coach .coach-item .coach-radio span::after {
     display: flex;
     content: "";
@@ -336,11 +374,13 @@ body {
     opacity: 0;
     visibility: hidden;
 }
+
 .evaluate .content .main .coach .list-coach .coach-item .coach-radio input:checked + span::after {
     opacity: 1;
     visibility: visible;
     transition: all 0.25s linear;
 }
+
 .evaluate .content .main .form {
     display: flex;
     flex-direction: column;
@@ -350,15 +390,18 @@ body {
     flex: 1;
     gap: 20px;
 }
+
 .evaluate .content .main .form .form-title {
     font-size: 30px;
     font-weight: bold;
     text-align: center;
-    
+
 }
+
 .evaluate .content .main .form .form-title p {
     margin: 0;
 }
+
 .evaluate .content .main .form .describe {
     display: flex;
     gap: 35px;
@@ -367,38 +410,46 @@ body {
     color: #808191;
     font-style: italic;
 }
+
 .evaluate .content .main .form .form-content {
     display: flex;
     flex-direction: column;
 }
+
 .evaluate .content .main .form .form-content .form-item {
     display: flex;
     flex-direction: column;
 }
+
 .evaluate .content .main .form .form-content .form-item .form-item__name {
     font-size: 18px;
     font-weight: bold;
 }
+
 .evaluate .content .main .form .form-content .form-item .form-item__evaluate {
     display: flex;
     justify-content: space-around;
 }
+
 .evaluate .content .main .form .form-content .form-item .form-item__evaluate .form-item__radio {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
 }
+
 /* Radio Input Custom */
 .evaluate .content .main .form .form-content .form-item .form-item__evaluate .form-item__radio .radio-custom {
-    
+
 }
+
 .evaluate .content .main .form .form-content .form-item .form-item__evaluate .form-item__radio .radio-custom input {
     position: absolute;
     opacity: 0;
     visibility: hidden;
     cursor: pointer;
 }
+
 .evaluate .content .main .form .form-content .form-item .form-item__evaluate .form-item__radio .radio-custom span {
     display: flex;
     align-items: center;
@@ -408,6 +459,7 @@ body {
     cursor: pointer;
     position: relative;
 }
+
 .evaluate .content .main .form .form-content .form-item .form-item__evaluate .form-item__radio .radio-custom span::before {
     display: flex;
     content: "";
@@ -419,6 +471,7 @@ body {
     transition: 0.25s ease;
     box-shadow: inset 0 0 0 0.125em #684343;
 }
+
 .evaluate .content .main .form .form-content .form-item .form-item__evaluate .form-item__radio .radio-custom span::after {
     display: flex;
     content: "\f00c";
@@ -436,31 +489,37 @@ body {
     opacity: 0;
     visibility: hidden;
 }
-.evaluate .content .main .form .form-content .form-item .form-item__evaluate .form-item__radio .radio-custom 
+
+.evaluate .content .main .form .form-content .form-item .form-item__evaluate .form-item__radio .radio-custom
 input:checked + span::after {
     opacity: 1;
     visibility: visible;
     transition: all 0.25s linear;
 }
+
 .evaluate .content .main .form .form-content .form-comment .form-comment__name {
     font-size: 18px;
     font-weight: bold;
 }
+
 .evaluate .content .main .form .form-content .form-comment .form-comment__evaluate {
     width: 100%;
 }
+
 .evaluate .content .main .form .form-content .form-comment .form-comment__evaluate input {
     width: 100%;
     border: none;
     border-bottom: 1px solid #9f9fa7;
     box-sizing: border-box;
     padding: 10px;
-     outline: none;
-     font-size: 17px;
+    outline: none;
+    font-size: 17px;
 }
+
 .evaluate .content .main .form .form-content .form-comment .form-comment__evaluate input:focus {
     transition: all 0.2s linear;
 }
+
 .evaluate .content .main .form .form-content .form-btn {
     margin-top: 40px;
     display: flex;
@@ -468,6 +527,7 @@ input:checked + span::after {
     justify-content: center;
     gap: 30px;
 }
+
 .evaluate .content .main .form .form-content .form-btn button {
     display: flex;
     align-items: center;
@@ -476,67 +536,80 @@ input:checked + span::after {
     padding: 5px 10px;
     gap: 10px;
     cursor: pointer;
-    color : white;
+    color: white;
 }
 
 .evaluate .content .main .form .form-content .form-btn button a {
     text-decoration: none;
-    color : white;
+    color: white;
 }
+
 .btn {
     width: 100px;
     height: 40px;
     border-radius: 10px;
 }
+
 .btn-cancel {
     background: #FF5D6D;
     border-color: transparent;
 }
+
 .btn-cancel:hover {
     background: white;
     border-color: #FF5D6D;
     transition: all 0.2s linear;
     color: #FF5D6D;
 }
+
 .evaluate .content .main .form .form-content .form-btn .btn-cancel:hover a {
     color: #FF5D6D;
     transition: all 0.2s linear;
 }
+
 .evaluate .content .main .form .form-content .form-btn .btn-cancel:hover {
     color: #FF5D6D;
     transition: all 0.2s linear;
 }
+
 .btn-submit {
     background: #2FA156;
     border-color: transparent;
 }
+
 .btn-submit:hover {
     background: white;
     border-color: #2FA156;
     transition: all 0.2s linear;
 }
+
 .evaluate .content .main .form .form-content .form-btn .btn-submit:hover {
     color: #2FA156;
     transition: all 0.2s linear;
 }
+
 .disabled {
     pointer-events: none;
     opacity: 0.5;
 }
+
 .not-active {
     pointer-events: none;
     cursor: alias;
 }
-.notify{
+
+.notify {
     padding: 15px;
     text-align: center;
     font-weight: bold;
 }
-.note-red{
+
+.note-red {
     color: red;
     background: #ffefef;
     border: 1px solid #ffd1d1;
 }
+
 .note-green {
     color: #45bc24;
     background: #e8ffe4;

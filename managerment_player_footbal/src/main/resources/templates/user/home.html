@@ -28,7 +28,7 @@
                     <div class="title">
                         <div class="title-image">
                             <img src="/player/dist/img/soccer-icon.png" alt="Ảnh quả bóng"
-                                 style="width: 50px; margin-left: 18px;">
+                            >
                         </div>
                         <p>Player Home</p>
                     </div>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="avatar">
                                 <div class="avatar-image">
-                                    <img th:src="@{${player.avatar}}" alt="Your Image">
+                                    <img th:src="@{'image/'+ ${player.avatar}}" alt="Your Image">
                                 </div>
                                 <div class="btn-edit"><a href="/user/profile">Edit</a></div>
                             </div>
@@ -68,32 +68,28 @@
                                 <p>Player Stats</p>
                                 <canvas id="chart"></canvas>
                             </div>
-                            <div class="line-chart">
-                                <p>All Player Stats</p>
-                                <canvas id="canvas" class="chartjs-render-monitor"></canvas>
-                            </div>
                             <div class="report-health">
                                 <p>Báo cáo sức khỏe gần nhất : </p>
                                 <div class="report-health__content">
                                     <div class="report-health__item health-icon">
                                         <img src="/player/dist/img/heartbeat-icon.png" alt="Nhịp tim">
-                                        <!--                                        <p style="color: #ED1C24"-->
-                                        <!--                                           th:text="${medical_report.heartbeat} + ' nhịp/phút'"></p>-->
+                                        <p style="color: #ED1C24"
+                                           th:text="${medical_report.heartRate} + ' nhịp/phút'"></p>
                                     </div>
                                     <div class="report-health__item health-height">
                                         <img th:src="@{/player/dist/img/height-icon.png}" alt="Height">
-                                        <!--                                        <p style="color: #00A2E8;" th:text="${medical_report.height} + ' cm'"></p>-->
+                                        <p style="color: #00A2E8;" th:text="${medical_report.height} + ' cm'"></p>
                                     </div>
                                     <div class="report-health__item health-weight">
                                         <img th:src="@{/player/dist/img/weight-icon.png}" alt="Weight">
-                                        <!--                                        <p style="color: #FF7F27;" th:text="${medical_report.weight} + ' kg'"></p>-->
+                                        <p style="color: #FF7F27;" th:text="${medical_report.weight} + ' kg'"></p>
                                     </div>
                                     <div class="report-health__item health-bmi">
                                         <img class="bmi-nohover" th:src="@{/player/dist/img/BMI-icon.png}"
                                              alt="BMI">
                                         <img class="bmi-hover" th:src="@{/player/dist/img/calculator.gif}"
                                              alt="GIF">
-                                        <!--                                        <p style="color: #A349A4;" th:text="${bmi}"></p>-->
+                                        <p style="color: #A349A4;" th:text="${bmi}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -175,11 +171,11 @@
                                         </th:block>
                                     </div>
                                 </div>
-                                <!--                                <div class="schedule-carousel__complete" th:if="${percent > 100}">-->
-                                <!--                                    <img th:src="@{/player/dist/img/medal.png}" alt="Medal">-->
-                                <!--                                    <p>Bạn đã hoàn thành khóa học của trung tâm</p>-->
-                                <!--                                    <img th:src="@{/player/dist/img/medal.png}" alt="Medal">-->
-                                <!--                                </div>-->
+                                                                <div class="schedule-carousel__complete" th:if="${percent > 100}">
+                                                                    <img th:src="@{/player/dist/img/medal.png}" alt="Medal">
+                                                                    <p>Bạn đã hoàn thành khóa học của trung tâm</p>
+                                                                    <img th:src="@{/player/dist/img/medal.png}" alt="Medal">
+                                                                </div>
                             </div>
                         </div>
                     </div>

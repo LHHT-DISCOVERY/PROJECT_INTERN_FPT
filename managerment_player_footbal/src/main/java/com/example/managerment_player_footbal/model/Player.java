@@ -42,7 +42,7 @@ public class Player {
 
     @ManyToOne
     @JoinColumn(name = "class_id", referencedColumnName = "class_id")
-//    @JsonBackReference
+    @JsonBackReference
     private Classes classes;
 
 
@@ -50,7 +50,7 @@ public class Player {
     @JsonManagedReference
     private Set<CoachRatingEntity> coachRatingEntities;
 
-    @ManyToMany()
+    @ManyToMany
     @JsonBackReference
     private Set<TeamEntity> teamEntities;
 

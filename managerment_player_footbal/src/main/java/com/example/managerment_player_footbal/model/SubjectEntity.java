@@ -10,7 +10,7 @@ public class SubjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int subjectId;
-    @Column
+    @Column(columnDefinition = "nvarchar(255)")
     private String subjectName;
 
     public SubjectEntity() {

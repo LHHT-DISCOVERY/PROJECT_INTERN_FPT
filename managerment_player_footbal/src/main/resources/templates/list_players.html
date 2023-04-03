@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<script defer
+	src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+	integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+	crossorigin="anonymous"></script>
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+<!-- Theme style -->
+<link rel="stylesheet" href="/css/adminlte.min.css" />
+<!-- overlayScrollbars -->
+<title>Admin</title>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+	integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/adminlte.css">
+
+<link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+
+
+	<!-- Navbar -->
+	<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+		<!-- Left navbar links -->
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
+				href="#" role="button"><i class="fas fa-bars"></i></a></li>
+			<li class="nav-item d-none d-sm-inline-block"><a href="#"
+				class="nav-link">Home</a></li>
+			<li class="nav-item d-none d-sm-inline-block"><a href="#"
+				class="nav-link">Contact</a></li>
+		</ul>
+
+		<!-- Right navbar links -->
+		<ul class="navbar-nav ml-auto">
+			<!-- Navbar Search -->
+			<li class="nav-item"><a class="nav-link"
+				data-widget="navbar-search" href="#" role="button"> <i
+					class="fas fa-search"></i>
+			</a>
+				<div class="navbar-search-block">
+					<form class="form-inline">
+						<div class="input-group input-group-sm">
+							<input class="form-control form-control-navbar" type="search"
+								placeholder="Search" aria-label="Search" />
+							<div class="input-group-append">
+								<button class="btn btn-navbar" type="submit">
+									<i class="fas fa-search"></i>
+								</button>
+								<button class="btn btn-navbar" type="button"
+									data-widget="navbar-search">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div></li>
+
+			<!-- Messages Dropdown Menu -->
+			<li class="nav-item dropdown"><a class="nav-link"
+				data-toggle="dropdown" href="#"> <i class="far fa-comments"></i>
+					<span class="badge badge-danger navbar-badge">3</span>
+			</a>
+				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+					<a href="#" class="dropdown-item"> <!-- Message Start -->
+						<div class="media">
+							<img src="/image/user1-128x128.jpg" alt="User Avatar"
+								class="img-size-50 mr-3 img-circle" />
+							<div class="media-body">
+								<h3 class="dropdown-item-title">
+									Brad Diesel <span class="float-right text-sm text-danger"><i
+										class="fas fa-star"></i></span>
+								</h3>
+								<p class="text-sm">Call me whenever you can...</p>
+								<p class="text-sm text-muted">
+									<i class="far fa-clock mr-1"></i> 4 Hours Ago
+								</p>
+							</div>
+						</div> <!-- Message End -->
+					</a>
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item"> <!-- Message Start -->
+						<div class="media">
+							<img src="image/user8-128x128.jpg" alt="User Avatar"
+								class="img-size-50 img-circle mr-3" />
+							<div class="media-body">
+								<h3 class="dropdown-item-title">
+									John Pierce <span class="float-right text-sm text-muted"><i
+										class="fas fa-star"></i></span>
+								</h3>
+								<p class="text-sm">I got your message bro</p>
+								<p class="text-sm text-muted">
+									<i class="far fa-clock mr-1"></i> 4 Hours Ago
+								</p>
+							</div>
+						</div> <!-- Message End -->
+					</a>
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item"> <!-- Message Start -->
+						<div class="media">
+							<div class="media-body">
+								<h3 class="dropdown-item-title">
+									Nora Silvester <span class="float-right text-sm text-warning"><i
+										class="fas fa-star"></i></span>
+								</h3>
+								<p class="text-sm">The subject goes here</p>
+								<p class="text-sm text-muted">
+									<i class="far fa-clock mr-1"></i> 4 Hours Ago
+								</p>
+							</div>
+						</div> <!-- Message End -->
+					</a>
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item dropdown-footer">See All
+						Messages</a>
+				</div></li>
+			<!-- Notifications Dropdown Menu -->
+			<li class="nav-item dropdown"><a class="nav-link"
+				data-toggle="dropdown" href="#"> <i class="far fa-bell"></i> <span
+					class="badge badge-warning navbar-badge">15</span>
+			</a>
+				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+					<span class="dropdown-item dropdown-header">15 Notifications</span>
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item"> <i
+						class="fas fa-envelope mr-2"></i> 4 new messages <span
+						class="float-right text-muted text-sm">3 mins</span>
+					</a>
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item"> <i class="fas fa-users mr-2"></i>
+						8 friend requests <span class="float-right text-muted text-sm">12
+							hours</span>
+					</a>
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item"> <i class="fas fa-file mr-2"></i>
+						3 new reports <span class="float-right text-muted text-sm">2
+							days</span>
+					</a>
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item dropdown-footer">See All
+						Notifications</a>
+				</div></li>
+			<li class="nav-item"><a class="nav-link"
+				data-widget="fullscreen" href="#" role="button"> <i
+					class="fas fa-expand-arrows-alt"></i>
+			</a></li>
+			<li class="nav-item"><a class="nav-link"
+				data-widget="control-sidebar" data-slide="true" href="#"
+				role="button"> <i class="fas fa-th-large"></i>
+			</a></li>
+		</ul>
+	</nav>
+
+	<aside class="main-sidebar sidebar-dark-primary elevation-4">
+		<!-- Brand Logo -->
+		<a href="#" class="brand-link"> <img src="/image/AdminLTELogo.png"
+			alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+			style="opacity: 0.8" /> <span class="brand-text font-weight-light">Admin</span>
+		</a>
+
+		<!-- Sidebar -->
+		<div class="sidebar">
+			<!-- Sidebar user panel (optional) -->
+			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+				<div class="image">
+					<img src="/image/user2-160x160.jpg" class="img-circle elevation-2"
+						alt="User Image" />
+				</div>
+				<div class="info">
+					<a href="#" class="d-block">Alexander Pierce</a>
+				</div>
+			</div>
+
+			<!-- Sidebar Menu -->
+			<nav class="mt-2">
+				<ul class="nav nav-pills nav-sidebar flex-column"
+					data-widget="treeview" role="menu" data-accordion="false">
+					<!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+					<li class="nav-item"><a href="#" class="nav-link"> <i
+							class="nav-icon fas fa-tachometer-alt"></i>
+							<p>Dashboard</p>
+					</a></li>
+					<li class="nav-item"><a href="/admin/classes"
+						class="nav-link"> <i class="nav-icon fas fa-th"></i>
+							<p>Quản lý học viên</p>
+					</a></li>
+					<li class="nav-item"><a th:href="@{/admin/listCoach}"
+						class="nav-link"> <i class="nav-icon fas fa-chart-pie"></i>
+							<p>Quản lý huấn luyện viên</p>
+					</a></li>
+					<li class="nav-item"><a href="/admin/schedule" class="nav-link"> <i
+							class="nav-icon fas fa-tree"></i>
+							<p>Quản lý lịch học</p>
+					</a></li>
+					<li class="nav-item"><a href="#" class="nav-link"> <i
+							class="nav-icon fas fa-edit"></i>
+							<p>Chức năng 4</p>
+					</a></li>
+					<li class="nav-item"><a href="#" class="nav-link"> <i
+							class="nav-icon fas fa-table"></i>
+							<p>Chức năng 5</p>
+					</a></li>
+					<li class="nav-header">EXAMPLES</li>
+					<li class="nav-item"><a href="#" class="nav-link">
+							<p>
+								Chức năng 6 <span class="badge badge-info right">2</span>
+							</p>
+					</a></li>
+					<li class="nav-item"><a href="#" class="nav-link"> <i
+							class="nav-icon far fa-image"></i>
+							<p>Chức năng 7</p>
+					</a></li>
+					<li class="nav-item"><a href="#" class="nav-link"> <i
+							class="nav-icon far fa-envelope"></i>
+							<p>
+								Mailbox <i class="fas fa-angle-left right"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Inbox</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Compose</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Read</p>
+							</a></li>
+						</ul></li>
+					<li class="nav-item"><a href="#" class="nav-link"> <i
+							class="nav-icon fas fa-book"></i>
+							<p>
+								Pages <i class="fas fa-angle-left right"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Invoice</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Profile</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>E-commerce</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Projects</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Project Add</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Project Edit</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Project Detail</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Contacts</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>FAQ</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Contact us</p>
+							</a></li>
+						</ul></li>
+					<li class="nav-item"><a href="#" class="nav-link"> <i
+							class="nav-icon far fa-plus-square"></i>
+							<p>
+								Extras <i class="fas fa-angle-left right"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>
+										Login & Register v1 <i class="fas fa-angle-left right"></i>
+									</p>
+							</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item"><a href="#" class="nav-link"> <i
+											class="far fa-circle nav-icon"></i>
+											<p>Login v1</p>
+									</a></li>
+									<li class="nav-item"><a href="#" class="nav-link"> <i
+											class="far fa-circle nav-icon"></i>
+											<p>Register v1</p>
+									</a></li>
+									<li class="nav-item"><a href="#" class="nav-link"> <i
+											class="far fa-circle nav-icon"></i>
+											<p>Forgot Password v1</p>
+									</a></li>
+									<li class="nav-item"><a href="#" class="nav-link"> <i
+											class="far fa-circle nav-icon"></i>
+											<p>Recover Password v1</p>
+									</a></li>
+								</ul></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>
+										Login & Register v2 <i class="fas fa-angle-left right"></i>
+									</p>
+							</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item"><a href="#" class="nav-link"> <i
+											class="far fa-circle nav-icon"></i>
+											<p>Login v2</p>
+									</a></li>
+									<li class="nav-item"><a href="#" class="nav-link"> <i
+											class="far fa-circle nav-icon"></i>
+											<p>Register v2</p>
+									</a></li>
+									<li class="nav-item"><a href="#" class="nav-link"> <i
+											class="far fa-circle nav-icon"></i>
+											<p>Forgot Password v2</p>
+									</a></li>
+									<li class="nav-item"><a href="#" class="nav-link"> <i
+											class="far fa-circle nav-icon"></i>
+											<p>Recover Password v2</p>
+									</a></li>
+								</ul></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Lockscreen</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Legacy User Menu</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Language Menu</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Error 404</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Error 500</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Pace</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Blank Page</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Starter Page</p>
+							</a></li>
+						</ul></li>
+					<li class="nav-item"><a href="#" class="nav-link"> <i
+							class="nav-icon fas fa-search"></i>
+							<p>
+								Search <i class="fas fa-angle-left right"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Simple Search</p>
+							</a></li>
+							<li class="nav-item"><a href="#" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Enhanced</p>
+							</a></li>
+						</ul></li>
+					<li class="nav-header">MISCELLANEOUS</li>
+					<li class="nav-item"><a href="https://adminlte.io/docs/3.1/"
+						class="nav-link">
+							<form th:action="@{/doLogout}" method="post">
+								<button type="submit">
+									<i class="fa-solid fa-right-from-bracket"></i> Logout
+								</button>
+							</form>
+					</a></li>
+				</ul>
+			</nav>
+			<!-- /.sidebar-menu -->
+		</div>
+		<!-- /.sidebar -->
+
+	</aside>
+	<!-- Nội dung -->
+	<div class="content-wrapper iframe-mode" data-widget="iframe"
+		data-loading-screen="750">
+		<main class="app-content ml-0">
+			<div class="app-title">
+				<ul class="app-breadcrumb breadcrumb side">
+					<li class="breadcrumb-item active"> <a href="/admin/classes"><i class="fa fa-angle-double-left"></i>   <b>Danh
+								sách học viên  </b><i class="fa fa-angle-double-left"></i></a></li>
+				</ul>
+				<div id="clock"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="tile">
+						<div class="tile-body">
+
+							<div class="row element-button">
+							
+								 <div class="col-sm-2">
+                                <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
+                        class="fas fa-print"></i> In dữ liệu</a>
+                            </div>
+
+
+								<div class="col-sm-2">
+									<a class="btn btn-excel btn-sm"  href="/admin/classes/exportPlayerList" title="In"><i
+										class="fas fa-file-excel"></i> Xuất Excel</a>
+								</div>
+
+								
+							</div>
+							<!-- Nội dung -->
+							<table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th width="10"><input type="checkbox" id="all"></th>
+                                    <th>ID học viên</th>
+                                    <th width="200">Tên lớp học</th>
+                                    <th width="200">Họ và tên</th>
+                                    <th width="150">Ảnh thẻ</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Weight(kg)</th>
+                                    <th>Height(cm)</th>
+                                    <th>Ví trí thi đấu</th>
+                                    <th>parentphone</th>
+                                    <th width="200">Tính năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+							<tr th:each="user : ${players}">
+         					<td width="10"><input type="checkbox" name="check1" value="1"></td>
+        					<td th:text="${user.playerId}"></td>
+        					<td th:text="${user.getClasses().getClassName()}"></td>
+       						<td th:text="${user.name}"></td>
+       						<td ><img class="img-card-person" th:src="@{{avatar}(avatar=${user.avatar})}" alt="" style="width: 100px;"></td>
+       						<td th:text="${user.birthday}"></td>
+        					<td th:text="${user.weight}"></td>
+        					<td th:text="${user.height}"></td>
+        					<td th:text="${user.position}"></td>
+        					<td class="parentphone" th:text="${user.parentPhone}"></td>
+        					<td>
+        					<a th:href="@{/admin/classes/{idClass}/update-player/{id}(idClass=${user.getClasses().getClassId()},id=${user.playerId})}" class="btn btn-primary">
+							Cập nhật </a>
+							<a th:href="@{/admin/classes/{idClass}/delete-player/{id}(idClass=${user.getClasses().getClassId()},id=${user.playerId})}" class="btn btn-danger btn-sm btn-delete trash">Xoá</a>
+							
+							</td>
+    						</tr>  
+                            </tbody>
+                        </table>
+							<!-- Nội dung -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+		
+		<script>
+		 //In dữ liệu
+		  var myApp = new function () {
+		    this.printTable = function () {
+		      var tab = document.getElementById('sampleTable');
+		      var win = window.open('', '', 'height=700,width=700');
+		      win.document.write(tab.outerHTML);
+		      win.document.close();
+		      win.print();
+		    }
+		  }
+		</script>
+</body>
+
+</html>

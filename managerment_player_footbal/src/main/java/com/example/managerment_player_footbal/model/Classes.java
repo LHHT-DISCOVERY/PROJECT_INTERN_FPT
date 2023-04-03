@@ -47,7 +47,7 @@ public class Classes {
     @OneToMany(mappedBy = "classEntity")
     @JsonManagedReference
     private Set<TeamEntity> teamEntities;
-    @OneToMany(mappedBy = "Classes")
+    @OneToMany(mappedBy = "classes")
     @JsonManagedReference
     private Set<CoachRatingEntity> coachRatingEntities;
 

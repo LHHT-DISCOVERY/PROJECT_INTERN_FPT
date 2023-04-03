@@ -61,13 +61,13 @@
                 <th>Giới Tính</th>
                 <th>Số Điện Thoại</th>
                 <th>Email</th>
-                <th>Account</th>
+<!--                <th>Account</th>-->
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="coach : ${coachList}" th:object="${coach}">
+            <tr th:each="coach : ${coachList}">
                 <td th:text="${coach.coachId}"></td>
                 <td th:text="${coach.nameCoach}"></td>
                 <td><img th:src="@{'/image/' + ${coach.avatar}}" alt="avatar" style="width: 80px ; height: 80px"></td>
@@ -76,10 +76,10 @@
                 <td th:text="${coach.gender} ? 'Nam' : 'Nữ'"></td>
                 <td th:text="${coach.phone}"></td>
                 <td th:text="${coach.email}"></td>
-                <td th:text="${coach.account.accountName}"></td>
+<!--                <td th:text="${coach.account.accountName}"></td>-->
                 <td>
                     <div>
-                        <a th:href="@{/admin/updateCoach/{id}(id=*{coachId})}" class="btn btn-warning"
+                        <a th:href="@{/admin/updateCoach/{id}(id=${coach.coachId})}" class="btn btn-warning"
 
                         ><i class="bi bi-pencil-square"></i
                         ></a>

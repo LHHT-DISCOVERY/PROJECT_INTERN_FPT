@@ -2,7 +2,6 @@ package com.example.managerment_player_footbal.controller.doctor_controller.Medi
 
 import com.example.managerment_player_footbal.model.Classes;
 import com.example.managerment_player_footbal.model.Player;
-import com.example.managerment_player_footbal.model.account.Account;
 import com.example.managerment_player_footbal.model.medical.Doctor.Doctor;
 import com.example.managerment_player_footbal.model.medical.MedicalReport.MedicalReport;
 import com.example.managerment_player_footbal.repository.classes_repository.IClassesRepository;
@@ -15,8 +14,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -49,6 +54,15 @@ public class MedicalReportController {
         model.addAttribute("doctorName",doctorInSession.getName());
         model.addAttribute("doctorId",doctorInSession.getDoctorId());
 
+        BindingResult result = (BindingResult) model.getAttribute("errors");
+        if (result != null) {
+            List<String> errorStrings = new ArrayList<String>();
+            for (FieldError error : result.getFieldErrors()) {
+                errorStrings.add(error.getDefaultMessage());
+            }
+            model.addAttribute("errorStrings", errorStrings);
+        }
+
         Player player = playerRepository.getById(id);
 
         MedicalReport report = new MedicalReport();
@@ -60,11 +74,18 @@ public class MedicalReportController {
     }
 
     @PostMapping("/report")
-    public String playerHealthReport(@ModelAttribute MedicalReport report) {
+    public String playerHealthReport(@Valid @ModelAttribute MedicalReport report, Errors errors,
+                                     RedirectAttributes redirectAttributes) {
+        if (errors.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", errors);
+            redirectAttributes.addFlashAttribute("report", report);
+            return "redirect:/doctor/medicalreport/" + report.getPlayer().getPlayerId();
+        }
         medicalReportRepository.save(report);
         String redirect = "redirect:/doctor/medicalreport/history/" + Long.toString(report.getPlayer().getPlayerId());
         return redirect;
     }
+
 
     @GetMapping("/history/{id}")
     public String playerHealthReportHistory(@PathVariable int id, Model model) {
